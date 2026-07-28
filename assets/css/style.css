@@ -133,9 +133,10 @@ p  { font-size: 1rem; color: var(--text-mid); }
   box-shadow: 0 8px 28px rgba(200,16,46,.4);
 }
 .btn-outline {
-  background: transparent;
+  background: var(--white);
   color: var(--navy);
   border: 2px solid var(--navy);
+  transition: all 0.3s ease;
 }
 .btn-outline:hover {
   background: var(--navy);
@@ -1521,7 +1522,7 @@ p  { font-size: 1rem; color: var(--text-mid); }
   padding-bottom: 3rem;
   border-bottom: 1px solid rgba(255,255,255,.1);
 }
-.footer-brand p { font-size: .9rem; margin-top: .85rem; max-width: 280px; }
+.footer-brand p, .footer-tagline { font-size: .9rem; margin-top: .85rem; max-width: 280px; color: rgba(255,255,255,0.78); }
 .footer-brand .site-logo .logo-name { color: var(--gold); }
 .footer-brand .site-logo .logo-sub  { color: rgba(255,255,255,.6); }
 .footer-heading {
