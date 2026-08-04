@@ -287,8 +287,8 @@ p  { font-size: 1rem; color: var(--text-mid); }
 .dropdown-menu {
   position: absolute;
   top: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%) translateY(8px);
+  left: 0;
+  transform: translateY(8px);
   background: var(--white);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-lg);
@@ -304,7 +304,7 @@ p  { font-size: 1rem; color: var(--text-mid); }
 .nav-dropdown:focus-within .dropdown-menu {
   opacity: 1;
   visibility: visible;
-  transform: translateX(-50%) translateY(0);
+  transform: translateY(0);
 }
 .dropdown-item {
   display: flex;
