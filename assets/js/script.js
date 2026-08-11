@@ -81,6 +81,12 @@
     });
   }
 
+  /* ── Auto-Update Copyright Year ───────────────────────────── */
+  function setCopyrightYear() {
+    const el = document.getElementById('copyright-year');
+    if (el) el.textContent = new Date().getFullYear();
+  }
+
   /* ── Active Nav Link ──────────────────────────────────────── */
   function setActiveNav() {
     const current = window.location.pathname.split('/').pop() || 'index.html';
@@ -112,6 +118,7 @@
     initReveal();
     initWaButtons();
     setActiveNav();
+    setCopyrightYear();
   });
 
 })();
