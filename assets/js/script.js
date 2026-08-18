@@ -119,6 +119,113 @@
     initWaButtons();
     setActiveNav();
     setCopyrightYear();
+    initPromoCarousel();
   });
 
+  /* ── Promo Banner Carousel ────────────────────────────────── */
+  function initPromoCarousel() {
+    const section  = document.getElementById('promo-banners');
+    const track    = document.getElementById('promoCarouselTrack');
+    const dotsWrap = document.getElementById('promoCarouselDots');
+    const prevBtn  = document.getElementById('promoPrev');
+    const nextBtn  = document.getElementById('promoNext');
+
+    if (!track) return;
+
+    const slides     = track.querySelectorAll('.promo-carousel-slide');
+    const dots       = dotsWrap ? dotsWrap.querySelectorAll('.promo-dot') : [];
+    const total      = slides.length;
+    let   current    = 0;
+    let   autoTimer  = null;
+    const INTERVAL   = 4500;   // 4.5 seconds
+
+    /* Respect prefers-reduced-motion */
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* Apply sliding transition only when motion is allowed */
+    if (!prefersReduced) {
+      track.style.transition = 'transform .55s cubic-bezier(.4,0,.2,1)';
+    }
+
+    /* ── Core: go to slide n ── */
+    function goTo(n) {
+      current = ((n % total) + total) % total;   // wrap around
+      track.style.transform = `translateX(-${current * 100}%)`;
+
+      /* Update ARIA live region */
+      track.setAttribute('aria-label', `Promotional image carousel, slide ${current + 1} of ${total}`);
+
+      /* Sync dots */
+      dots.forEach((dot, i) => {
+        const isActive = i === current;
+        dot.classList.toggle('active', isActive);
+        dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+    }
+
+    /* ── Autoplay ── */
+    function startAuto() {
+      if (prefersReduced) return;   // honour reduced-motion: no autoplay
+      autoTimer = setInterval(() => goTo(current + 1), INTERVAL);
+    }
+
+    function stopAuto() {
+      clearInterval(autoTimer);
+      autoTimer = null;
+    }
+
+    /* ── Prev / Next buttons ── */
+    if (prevBtn) prevBtn.addEventListener('click', () => { stopAuto(); goTo(current - 1); startAuto(); });
+    if (nextBtn) nextBtn.addEventListener('click', () => { stopAuto(); goTo(current + 1); startAuto(); });
+
+    /* ── Dot clicks ── */
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        const target = parseInt(dot.getAttribute('data-promo-dot'), 10);
+        if (!isNaN(target)) { stopAuto(); goTo(target); startAuto(); }
+      });
+    });
+
+    /* ── Pause on hover ── */
+    if (section) {
+      section.addEventListener('mouseenter', stopAuto);
+      section.addEventListener('mouseleave', startAuto);
+      /* Also pause when the section receives keyboard focus */
+      section.addEventListener('focusin',  stopAuto);
+      section.addEventListener('focusout', startAuto);
+    }
+
+    /* ── Touch / swipe support ── */
+    let touchStartX = 0;
+    let touchEndX   = 0;
+    const MIN_SWIPE = 40;   // px threshold
+
+    track.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    track.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      const delta = touchStartX - touchEndX;
+      if (Math.abs(delta) >= MIN_SWIPE) {
+        stopAuto();
+        goTo(delta > 0 ? current + 1 : current - 1);
+        startAuto();
+      }
+    }, { passive: true });
+
+    /* ── Keyboard arrow navigation ── */
+    if (section) {
+      section.addEventListener('keydown', e => {
+        if (e.key === 'ArrowRight') { stopAuto(); goTo(current + 1); startAuto(); }
+        if (e.key === 'ArrowLeft')  { stopAuto(); goTo(current - 1); startAuto(); }
+      });
+    }
+
+    /* ── Start ── */
+    goTo(0);
+    startAuto();
+  }
+
 })();
+
