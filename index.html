@@ -181,36 +181,71 @@
   </section>
 
   <!-- ── PROMO BANNER CAROUSEL ──────────────────────────────── -->
+  <!--
+    Desktop (>=768px): shows slide 1 (delivery) + slide 2 (offers) only.
+    Mobile  (<768px) : shows all 3 slides including slide 3 (discount).
+    Visibility is controlled by initPromoCarousel() in script.js.
+  -->
   <section class="promo-carousel-section" id="promo-banners" aria-label="Promotional Banners">
     <div class="promo-carousel-wrapper">
-      <!-- Track -->
-      <div class="promo-carousel-track" id="promoCarouselTrack" role="region" aria-label="Promotional image carousel" aria-live="polite">
-        <div class="promo-carousel-slide" role="group" aria-label="Slide 1 of 3">
-          <img src="assets/images/hero-banner-delivery.jpg" alt="Fast Delivery across Tamil Nadu and Bangalore – Genuine Sivakasi Crackers" loading="lazy" draggable="false">
+
+      <!-- Sliding track: flex row, JS moves it with translateX -->
+      <div class="promo-carousel-track" id="promoCarouselTrack"
+           role="region" aria-label="Promotional image carousel, slide 1 of 2" aria-live="polite">
+
+        <!-- Slide 1: Delivery — shown on desktop AND mobile -->
+        <div class="promo-carousel-slide" id="promoSlide0" role="group" aria-label="Slide 1">
+          <img src="assets/images/hero-banner-delivery.jpg"
+               alt="Fast Delivery across Tamil Nadu and Bangalore – Genuine Sivakasi Crackers"
+               loading="lazy" draggable="false">
         </div>
-        <div class="promo-carousel-slide" role="group" aria-label="Slide 2 of 3">
-          <img src="assets/images/hero-banner-offers.jpg" alt="Best Offers on Sivakasi Crackers – Maha Pattasu" loading="lazy" draggable="false">
+
+        <!-- Slide 2: Offers — shown on desktop AND mobile -->
+        <div class="promo-carousel-slide" id="promoSlide1" role="group" aria-label="Slide 2">
+          <img src="assets/images/hero-banner-offers.jpg"
+               alt="Best Offers on Sivakasi Crackers – Maha Pattasu"
+               loading="lazy" draggable="false">
         </div>
-        <div class="promo-carousel-slide" role="group" aria-label="Slide 3 of 3">
-          <img src="assets/images/hero-banner-discount.jpg" alt="Up to 75% Discount on Genuine Sivakasi Crackers" loading="lazy" draggable="false">
+
+        <!-- Slide 3: Discount — shown on MOBILE ONLY; hidden on desktop by JS -->
+        <div class="promo-carousel-slide" id="promoSlide2" role="group" aria-label="Slide 3">
+          <img src="assets/images/hero-banner-discount.jpg"
+               alt="Up to 75% Discount on Genuine Sivakasi Crackers"
+               loading="lazy" draggable="false">
         </div>
+
+      </div><!-- /track -->
+
+      <!-- Prev / Next arrows -->
+      <button class="promo-carousel-btn promo-carousel-btn--prev" id="promoPrev"
+              aria-label="Previous promotional banner" type="button">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2.5"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+      </button>
+      <button class="promo-carousel-btn promo-carousel-btn--next" id="promoNext"
+              aria-label="Next promotional banner" type="button">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2.5"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </button>
+
+      <!-- Dot indicators: dot 2 is hidden on desktop by JS -->
+      <div class="promo-carousel-dots" id="promoCarouselDots"
+           role="tablist" aria-label="Slide indicators">
+        <button class="promo-dot active" role="tab" aria-selected="true"
+                aria-label="Go to slide 1" data-promo-dot="0" type="button"></button>
+        <button class="promo-dot"        role="tab" aria-selected="false"
+                aria-label="Go to slide 2" data-promo-dot="1" type="button"></button>
+        <button class="promo-dot"        role="tab" aria-selected="false"
+                aria-label="Go to slide 3" data-promo-dot="2" type="button"></button>
       </div>
 
-      <!-- Arrow buttons -->
-      <button class="promo-carousel-btn promo-carousel-btn--prev" id="promoPrev" aria-label="Previous promotional banner">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-      </button>
-      <button class="promo-carousel-btn promo-carousel-btn--next" id="promoNext" aria-label="Next promotional banner">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-      </button>
-
-      <!-- Dot navigation -->
-      <div class="promo-carousel-dots" id="promoCarouselDots" role="tablist" aria-label="Slide indicators">
-        <button class="promo-dot active" role="tab" aria-selected="true"  aria-label="Go to slide 1" data-promo-dot="0"></button>
-        <button class="promo-dot"        role="tab" aria-selected="false" aria-label="Go to slide 2" data-promo-dot="1"></button>
-        <button class="promo-dot"        role="tab" aria-selected="false" aria-label="Go to slide 3" data-promo-dot="2"></button>
-      </div>
-    </div>
+    </div><!-- /wrapper -->
   </section>
 
   <!-- ── TRUST STRIP ─────────────────────────────────────────── -->
