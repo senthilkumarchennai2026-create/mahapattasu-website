@@ -1748,26 +1748,29 @@ p  { font-size: 1rem; color: var(--text-mid); }
 
 /* ============================================================
    PROMO BANNER CAROUSEL
-   Section sits directly below the hero; images are full-poster
-   designs so we use object-fit:contain to never crop them.
+   ──────────────────────────────────────────────────────────
+   Desktop (>=768px): 2 slides shown  (delivery + offers).
+   Mobile  (<768px) : 3 slides shown  (+ discount).
+   Slide visibility is toggled by initPromoCarousel() in
+   script.js using the HTML `hidden` attribute + aria-hidden.
+   Images use object-fit:contain so poster designs are never
+   cropped regardless of viewport dimensions.
    ============================================================ */
 
-/* ── Section wrapper ────────────────────────────────────────── */
+/* ── Outer section ──────────────────────────────────────────── */
 .promo-carousel-section {
   background: var(--navy);
   padding: 0;
   position: relative;
   overflow: hidden;
-  /* Subtle top/bottom border in brand gold to mark the section */
-  border-top: 3px solid var(--gold);
+  border-top:    3px solid var(--gold);
   border-bottom: 3px solid var(--gold);
 }
 
-/* ── Outer wrapper (positions arrows + dots relative to this) ─ */
+/* ── Wrapper (anchors arrows + dots) ───────────────────────── */
 .promo-carousel-wrapper {
   position: relative;
   width: 100%;
-  /* Limit max-height on very wide screens; images are posters   */
   max-height: 640px;
   overflow: hidden;
 }
@@ -1776,12 +1779,12 @@ p  { font-size: 1rem; color: var(--text-mid); }
 .promo-carousel-track {
   display: flex;
   width: 100%;
-  /* transition is applied via JS so it can be disabled for      */
-  /* prefers-reduced-motion users.                                */
+  /* Transition is applied via JS so it is disabled automatically
+     when prefers-reduced-motion is detected. */
   will-change: transform;
 }
 
-/* Each slide occupies 100% of the wrapper width */
+/* ── Individual slide ───────────────────────────────────────── */
 .promo-carousel-slide {
   flex: 0 0 100%;
   width: 100%;
@@ -1789,11 +1792,16 @@ p  { font-size: 1rem; color: var(--text-mid); }
   align-items: center;
   justify-content: center;
   background: var(--navy);
-  /* min-height keeps empty space visible during load            */
-  min-height: 200px;
+  min-height: 200px;        /* visible during image load */
 }
 
-/* Poster image – never crop, always show the full design */
+/* The `hidden` attribute (set by JS on desktop) fully removes
+   the slide from layout AND from accessibility tree. */
+.promo-carousel-slide[hidden] {
+  display: none;
+}
+
+/* ── Poster image — never crop, always show full design ─────── */
 .promo-carousel-slide img {
   width: 100%;
   height: auto;
@@ -1817,13 +1825,12 @@ p  { font-size: 1rem; color: var(--text-mid); }
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: rgba(11, 31, 58, .72);       /* navy with alpha    */
+  background: rgba(11, 31, 58, .72);
   color: var(--gold);
   border: 2px solid var(--gold);
   cursor: pointer;
-  transition: background .2s ease, transform .2s ease, opacity .2s ease;
   opacity: .85;
-  /* keep arrows inside the section on narrow viewports          */
+  transition: background .2s ease, opacity .2s ease, border-color .2s ease;
   margin: 0 .5rem;
 }
 .promo-carousel-btn:hover,
@@ -1835,7 +1842,7 @@ p  { font-size: 1rem; color: var(--text-mid); }
   outline: none;
 }
 .promo-carousel-btn:focus-visible {
-  box-shadow: 0 0 0 3px rgba(242,183,5,.55);
+  box-shadow: 0 0 0 3px rgba(242, 183, 5, .55);
 }
 .promo-carousel-btn--prev { left: 1rem; }
 .promo-carousel-btn--next { right: 1rem; }
@@ -1850,12 +1857,13 @@ p  { font-size: 1rem; color: var(--text-mid); }
   gap: 10px;
   z-index: 10;
 }
+
 .promo-dot {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: rgba(255,255,255,.45);
-  border: 2px solid rgba(255,255,255,.6);
+  background: rgba(255, 255, 255, .45);
+  border: 2px solid rgba(255, 255, 255, .6);
   cursor: pointer;
   padding: 0;
   transition: background .25s ease, transform .25s ease, border-color .25s ease;
@@ -1866,28 +1874,30 @@ p  { font-size: 1rem; color: var(--text-mid); }
   transform: scale(1.35);
 }
 .promo-dot:hover:not(.active) {
-  background: rgba(255,255,255,.8);
-  border-color: rgba(255,255,255,.8);
+  background: rgba(255, 255, 255, .8);
+  border-color: rgba(255, 255, 255, .8);
 }
 .promo-dot:focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 3px;
 }
 
-/* ── Reduce motion: instant transitions, no autoplay movement ─ */
+/* The `hidden` attribute (set by JS on desktop for dot 2) fully
+   removes it from layout and the accessibility tree. */
+.promo-dot[hidden] {
+  display: none;
+}
+
+/* ── Prefers-reduced-motion: disable all transitions ────────── */
 @media (prefers-reduced-motion: reduce) {
-  .promo-carousel-track {
-    transition: none !important;
-  }
+  .promo-carousel-track,
+  .promo-carousel-btn,
   .promo-dot {
-    transition: none !important;
-  }
-  .promo-carousel-btn {
     transition: none !important;
   }
 }
 
-/* ── Responsive tweaks ──────────────────────────────────────── */
+/* ── Narrow-screen tweaks (<= 640px) ───────────────────────── */
 @media (max-width: 640px) {
   .promo-carousel-btn {
     width: 36px;
@@ -1895,7 +1905,6 @@ p  { font-size: 1rem; color: var(--text-mid); }
   }
   .promo-carousel-btn--prev { left: .4rem; }
   .promo-carousel-btn--next { right: .4rem; }
-  .promo-carousel-dots      { bottom: 10px; gap: 8px; }
-  .promo-dot                { width: 8px; height: 8px; }
+  .promo-carousel-dots { bottom: 10px; gap: 8px; }
+  .promo-dot { width: 8px; height: 8px; }
 }
-
