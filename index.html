@@ -182,9 +182,9 @@
 
   <!-- ── PROMO BANNER CAROUSEL ──────────────────────────────── -->
   <!--
-    Desktop (>=768px): shows slide 1 (delivery) + slide 2 (offers) only.
-    Mobile  (<768px) : shows all 3 slides including slide 3 (discount).
-    Visibility is controlled by initPromoCarousel() in script.js.
+    Desktop (>=768px): shows 2 landscape banners (desktop-hero-banner-discount.jpg, desktop-hero-banner-offers.jpg).
+    Mobile  (<768px) : shows 3 portrait posters (hero-banner-delivery.jpg, hero-banner-offers.jpg, hero-banner-discount.jpg).
+    Image sources and visibility are managed by initPromoCarousel() in script.js.
   -->
   <section class="promo-carousel-section" id="promo-banners" aria-label="Promotional Banners">
     <div class="promo-carousel-wrapper">
@@ -193,21 +193,21 @@
       <div class="promo-carousel-track" id="promoCarouselTrack"
            role="region" aria-label="Promotional image carousel, slide 1 of 2" aria-live="polite">
 
-        <!-- Slide 1: Delivery — shown on desktop AND mobile -->
+        <!-- Slide 1: Discount banner on desktop / Delivery poster on mobile -->
         <div class="promo-carousel-slide" id="promoSlide0" role="group" aria-label="Slide 1">
-          <img src="assets/images/hero-banner-delivery.jpg"
-               alt="Fast Delivery across Tamil Nadu and Bangalore – Genuine Sivakasi Crackers"
+          <img src="assets/images/desktop-hero-banner-discount.jpg"
+               alt="Up to 75% Discount on Genuine Sivakasi Crackers – Sri Mahalakshmi Pyro"
                loading="lazy" draggable="false">
         </div>
 
-        <!-- Slide 2: Offers — shown on desktop AND mobile -->
+        <!-- Slide 2: Offers banner on desktop / Offers poster on mobile -->
         <div class="promo-carousel-slide" id="promoSlide1" role="group" aria-label="Slide 2">
-          <img src="assets/images/hero-banner-offers.jpg"
+          <img src="assets/images/desktop-hero-banner-offers.jpg"
                alt="Best Offers on Sivakasi Crackers – Maha Pattasu"
                loading="lazy" draggable="false">
         </div>
 
-        <!-- Slide 3: Discount — shown on MOBILE ONLY; hidden on desktop by JS -->
+        <!-- Slide 3: Discount poster on mobile only; hidden on desktop by JS -->
         <div class="promo-carousel-slide" id="promoSlide2" role="group" aria-label="Slide 3">
           <img src="assets/images/hero-banner-discount.jpg"
                alt="Up to 75% Discount on Genuine Sivakasi Crackers"
