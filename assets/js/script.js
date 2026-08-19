@@ -123,8 +123,8 @@
   });
 
   /* ── Promo Banner Carousel ──────────────────────────────────
-     Desktop (>=768px): 2 slides  → delivery + offers
-     Mobile  (<768px) : 3 slides  → delivery + offers + discount
+     Desktop (>=768px): 2 slides  → desktop-hero-banner-discount.jpg + desktop-hero-banner-offers.jpg
+     Mobile  (<768px) : 3 slides  → hero-banner-delivery.jpg + hero-banner-offers.jpg + hero-banner-discount.jpg
      ─────────────────────────────────────────────────────────── */
   function initPromoCarousel() {
     var section = document.getElementById('promo-banners');
@@ -150,6 +150,18 @@
     var DESKTOP_TOTAL = 2;
     var MOBILE_TOTAL = slides.length; /* 3 */
 
+    /* Slide images for Desktop (landscape) and Mobile (portrait) */
+    var DESKTOP_IMAGES = [
+      { src: 'assets/images/desktop-hero-banner-discount.jpg', alt: 'Up to 75% Discount on Genuine Sivakasi Crackers – Sri Mahalakshmi Pyro' },
+      { src: 'assets/images/desktop-hero-banner-offers.jpg', alt: 'Best Diwali Offers and Deals – Sri Mahalakshmi Pyro' }
+    ];
+
+    var MOBILE_IMAGES = [
+      { src: 'assets/images/hero-banner-delivery.jpg', alt: 'Fast Delivery across Tamil Nadu and Bangalore – Genuine Sivakasi Crackers' },
+      { src: 'assets/images/hero-banner-offers.jpg', alt: 'Best Offers on Sivakasi Crackers – Maha Pattasu' },
+      { src: 'assets/images/hero-banner-discount.jpg', alt: 'Up to 75% Discount on Genuine Sivakasi Crackers' }
+    ];
+
     /* Current slide index and timer handle */
     var current = 0;
     var autoTimer = null;
@@ -171,6 +183,7 @@
 
     /*
      * applyBreakpoint():
+     *   • Updates image sources (wide landscape on desktop, portrait on mobile).
      *   • Hides/shows slide[2] and dot[2] using the `hidden` attribute.
      *   • CSS rule `.promo-carousel-slide[hidden] { display:none }` ensures
      *     the hidden slide takes no flex space, so translateX(-100%) for
@@ -180,6 +193,27 @@
      */
     function applyBreakpoint() {
       var isDesktop = DESKTOP_MQ.matches;
+
+      /* Update images based on screen mode */
+      slides.forEach(function (slide, idx) {
+        var img = slide.querySelector('img');
+        if (!img) return;
+        if (isDesktop && DESKTOP_IMAGES[idx]) {
+          if (img.getAttribute('src') !== DESKTOP_IMAGES[idx].src) {
+            img.src = DESKTOP_IMAGES[idx].src;
+          }
+          if (DESKTOP_IMAGES[idx].alt) {
+            img.alt = DESKTOP_IMAGES[idx].alt;
+          }
+        } else if (!isDesktop && MOBILE_IMAGES[idx]) {
+          if (img.getAttribute('src') !== MOBILE_IMAGES[idx].src) {
+            img.src = MOBILE_IMAGES[idx].src;
+          }
+          if (MOBILE_IMAGES[idx].alt) {
+            img.alt = MOBILE_IMAGES[idx].alt;
+          }
+        }
+      });
 
       /* Third slide */
       if (slides[2]) {
