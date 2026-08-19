@@ -194,26 +194,9 @@
     function applyBreakpoint() {
       var isDesktop = DESKTOP_MQ.matches;
 
-      /* Update images based on screen mode */
-      slides.forEach(function (slide, idx) {
-        var img = slide.querySelector('img');
-        if (!img) return;
-        if (isDesktop && DESKTOP_IMAGES[idx]) {
-          if (img.getAttribute('src') !== DESKTOP_IMAGES[idx].src) {
-            img.src = DESKTOP_IMAGES[idx].src;
-          }
-          if (DESKTOP_IMAGES[idx].alt) {
-            img.alt = DESKTOP_IMAGES[idx].alt;
-          }
-        } else if (!isDesktop && MOBILE_IMAGES[idx]) {
-          if (img.getAttribute('src') !== MOBILE_IMAGES[idx].src) {
-            img.src = MOBILE_IMAGES[idx].src;
-          }
-          if (MOBILE_IMAGES[idx].alt) {
-            img.alt = MOBILE_IMAGES[idx].alt;
-          }
-        }
-      });
+      /* Slides 1 & 2 now use <picture>/<source> in the HTML, so the
+         browser picks the correct image natively — no JS src-swap
+         needed (that swap was causing a flash/jump on mobile). */
 
       /* Third slide */
       if (slides[2]) {
