@@ -1749,12 +1749,11 @@ p  { font-size: 1rem; color: var(--text-mid); }
 /* ============================================================
    PROMO BANNER CAROUSEL
    ──────────────────────────────────────────────────────────
-   Desktop (>=768px): 2 slides shown  (delivery + offers).
-   Mobile  (<768px) : 3 slides shown  (+ discount).
-   Slide visibility is toggled by initPromoCarousel() in
-   script.js using the HTML `hidden` attribute + aria-hidden.
-   Images use object-fit:contain so poster designs are never
-   cropped regardless of viewport dimensions.
+   Desktop (>=768px): 2 landscape banners shown (discount + offers).
+   Mobile  (<768px) : 3 portrait posters shown  (delivery + offers + discount).
+   Slide visibility & sources are managed by initPromoCarousel() in script.js.
+   Desktop banners fill full width naturally with object-fit: cover.
+   Mobile posters use object-fit: contain so designs are never cropped.
    ============================================================ */
 
 /* ── Outer section ──────────────────────────────────────────── */
@@ -1801,7 +1800,7 @@ p  { font-size: 1rem; color: var(--text-mid); }
   display: none;
 }
 
-/* ── Poster image — never crop, always show full design ─────── */
+/* ── Poster image — mobile defaults (contain portrait posters) ─ */
 .promo-carousel-slide img {
   width: 100%;
   height: auto;
@@ -1811,6 +1810,20 @@ p  { font-size: 1rem; color: var(--text-mid); }
   display: block;
   user-select: none;
   -webkit-user-drag: none;
+}
+
+/* ── Desktop adjustments: wide landscape banners fill full width ── */
+@media (min-width: 768px) {
+  .promo-carousel-wrapper {
+    max-height: none;
+  }
+  .promo-carousel-slide {
+    min-height: auto;
+  }
+  .promo-carousel-slide img {
+    max-height: none;
+    object-fit: cover;
+  }
 }
 
 /* ── Prev / Next arrow buttons ──────────────────────────────── */
