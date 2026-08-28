@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Full Price List & Estimate | Maha Pattasu – Sri Mahalakshmi Pyro</title>
+  <meta name="description" content="Browse the complete Sivakasi crackers price list from Sri Mahalakshmi Pyro (Maha Pattasu). Add quantities and send your price estimate via WhatsApp.">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" href="assets/images/logo.png" type="image/png">
+
+  <!-- ============================================================
+       PAGE-SPECIFIC STYLES  (does not touch shared style.css)
+       ============================================================ -->
+  <style>
+    /* ── Estimate tool wrapper ───────────────────────────────── */
+    .pl-section { padding: 3rem 0 2rem; }
+
+    /* ── Category block ──────────────────────────────────────── */
+    .pl-category-section {
+      margin-bottom: 3rem;
+      border-radius: var(--radius-md);
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+    .pl-category-heading {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      background: var(--navy);
+      color: var(--gold);
+      font-family: var(--font-head);
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      padding: 1rem 1.5rem;
+      margin: 0;
+      border-bottom: 3px solid var(--gold);
+    }
+    .pl-category-heading .pl-cat-icon { font-size: 1.4rem; }
+
+    /* ── Sub-group heading ───────────────────────────────────── */
+    .pl-subgroup-wrap { padding: 0 1.25rem 1rem; }
+    .pl-subgroup-heading {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--navy);
+      background: rgba(11,31,58,.06);
+      padding: .5rem 1rem;
+      border-radius: var(--radius-sm);
+      margin: 1rem 0 .5rem;
+      border-left: 4px solid var(--red);
+    }
+
+    /* ── Price estimate cards (replaces table layout) ───────────
+       Matches the approved crackers-online-order.pages.dev card
+       pattern: icon + name/pack + price on top row, qty stepper +
+       subtotal on the bottom row — no separate Total column. ──── */
+    .pl-cards-wrap { margin-bottom: .75rem; }
+    .pl-item-card {
+      background: var(--white);
+      border: 1px solid #eee;
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.1rem;
+      margin-bottom: .7rem;
+    }
+    .pl-item-card:last-child { margin-bottom: 0; }
+    .pl-item-top {
+      display: flex;
+      align-items: flex-start;
+      gap: .8rem;
+    }
+    .pl-item-icon {
+      width: 46px; height: 46px; flex: 0 0 auto;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #fdf1d8, #f7e0a8);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+    }
+    .pl-item-info { flex: 1 1 auto; min-width: 0; }
+    .pl-name { font-weight: 700; font-size: 1.03rem; color: var(--text-dark); line-height: 1.3; }
+    .pl-pack { font-size: .8rem; color: var(--text-light); margin-top: 2px; }
+
+    .pl-item-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .75rem;
+      margin-top: .8rem;
+      padding-top: .8rem;
+      border-top: 1px dashed #e5ddc9;
+    }
+    .pl-item-subtotal { text-align: right; }
+    .pl-subtotal-label {
+      display: block;
+      font-size: .68rem;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    /* ── Combined price cell: strikethrough MRP stacked above the
+       discounted rate — exact colors matched to the approved
+       standalone estimate page (was: #b4432f, now: #187a3a) ────── */
+    .pl-price-combined {
+      flex: 0 0 auto;
+      text-align: right;
+      line-height: 1.3;
+    }
+    .pl-mrp-val {
+      display: block;
+      font-size: .82rem;
+      color: #b4432f;
+      text-decoration: line-through;
+      white-space: nowrap;
+    }
+    .pl-price-val {
+      display: block;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #187a3a;
+      white-space: nowrap;
+    }
+
+    /* ── Qty stepper ─────────────────────────────────────────── */
+    .pl-qty-wrap {
+      display: inline-flex;
+      align-items: center;
+      border: 1.5px solid #ccc;
+      border-radius: 6px;
+      overflow: hidden;
+      height: 34px;
+    }
+    .pl-qty-btn {
+      background: var(--light-grey);
+      border: none;
+      width: 30px;
+      height: 34px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--navy);
+      cursor: pointer;
+      transition: background .15s;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      padding: 0;
+    }
+    .pl-qty-btn:hover { background: var(--gold); color: var(--navy); }
+    .pl-qty-btn:active { background: var(--red); color: var(--white); }
+    .pl-qty {
+      width: 42px;
+      height: 34px;
+      border: none;
+      border-left: 1.5px solid #ccc;
+      border-right: 1.5px solid #ccc;
+      text-align: center;
+      font-family: var(--font-body);
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--navy);
+      background: var(--white);
+      -moz-appearance: textfield;
+      padding: 0;
+    }
+    .pl-qty::-webkit-inner-spin-button,
+    .pl-qty::-webkit-outer-spin-button { -webkit-appearance: none; }
+    .pl-qty:focus { outline: 2px solid var(--gold); outline-offset: -2px; }
+
+    /* ── Subtotal (inside item-bottom row): single bold navy
+       number, matching the approved reference page exactly ─────── */
+    .pl-line-total {
+      display: block;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--navy);
+      white-space: nowrap;
+    }
+
+    /* ── VIP placeholder ─────────────────────────────────────── */
+    .pl-vip-placeholder {
+      padding: 2rem 1.5rem;
+      text-align: center;
+      color: var(--text-mid);
+    }
+    .pl-vip-placeholder p { margin-top: .5rem; font-size: .95rem; }
+    .pl-vip-placeholder a { color: var(--red); font-weight: 700; }
+
+    /* ── Sticky grand total bar ──────────────────────────────── */
+    #pl-sticky-bar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 8000;
+      background: var(--navy);
+      color: var(--white);
+      border-top: 3px solid var(--gold);
+      box-shadow: 0 -4px 24px rgba(0,0,0,.25);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: .75rem 1.25rem;
+      flex-wrap: wrap;
+    }
+    .pl-total-label {
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: rgba(255,255,255,.65);
+      margin-bottom: .1rem;
+    }
+    #pl-grand-total {
+      font-family: var(--font-head);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--gold);
+      letter-spacing: -.01em;
+    }
+    #pl-min-warning {
+      font-size: .8rem;
+      color: #ffb3b3;
+      margin-top: .15rem;
+      display: none;
+    }
+    #pl-review-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: var(--gold);
+      color: var(--navy);
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: .75rem 1.6rem;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background .2s, transform .2s, opacity .2s;
+      white-space: nowrap;
+      flex-shrink: 0;
+      box-shadow: 0 4px 14px rgba(242,183,5,.35);
+    }
+    #pl-review-btn:hover:not([disabled]) {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+    }
+    #pl-review-btn[disabled],
+    #pl-review-btn.disabled {
+      background: #888;
+      color: #ddd;
+      box-shadow: none;
+      cursor: not-allowed;
+      opacity: .7;
+    }
+    #pl-review-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+    /* ── Sticky bar mobile: sit above the mobile action bar (60px) ── */
+    @media (max-width: 768px) {
+      #pl-sticky-bar {
+        bottom: 60px;
+        padding: .6rem 1rem;
+        gap: .6rem;
+      }
+      #pl-grand-total { font-size: 1.25rem; }
+      #pl-review-btn { padding: .6rem 1rem; font-size: .88rem; }
+    }
+
+    /* ── Compact item cards on small phones ──────────────────── */
+    @media (max-width: 480px) {
+      .pl-item-card { padding: .8rem .85rem; }
+      .pl-item-icon { width: 38px; height: 38px; font-size: 16px; border-radius: 8px; }
+      .pl-name { font-size: .92rem; }
+      .pl-pack { font-size: .72rem; }
+      .pl-mrp-val { font-size: .72rem; }
+      .pl-price-val { font-size: .95rem; }
+      .pl-qty-wrap { height: 30px; }
+      .pl-qty-btn { width: 26px; height: 30px; font-size: 1rem; }
+      .pl-qty { width: 34px; height: 30px; font-size: .85rem; }
+      .pl-line-total { font-size: .9rem; }
+      .pl-subtotal-label { font-size: .62rem; }
+    }
+
+    /* Extra body padding so content doesn't hide behind sticky bars */
+    body.pl-page {
+      padding-bottom: 120px !important;
+    }
+    @media (max-width: 768px) {
+      body.pl-page {
+        padding-bottom: 190px !important;
+      }
+    }
+
+    /* ── Customer notice modal ───────────────────────────────── */
+    #notice-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(11,31,58,.82);
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      backdrop-filter: blur(3px);
+      transition: opacity .3s ease;
+    }
+    #notice-overlay.notice-hidden {
+      display: none;
+    }
+    .notice-modal {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 2rem 1.75rem 1.75rem;
+      max-width: 560px;
+      width: 100%;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0,0,0,.4);
+      border-top: 5px solid var(--gold);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .notice-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(11,31,58,.08);
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 1rem;
+      color: var(--navy);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s;
+    }
+    .notice-close:hover { background: var(--red); color: var(--white); }
+    .notice-icon { font-size: 2.5rem; text-align: center; margin-bottom: .75rem; }
+    .notice-heading {
+      font-family: var(--font-head);
+      font-size: 1.35rem;
+      color: var(--navy);
+      text-align: center;
+      margin-bottom: 1.25rem;
+      font-weight: 800;
+    }
+    .notice-body p {
+      font-size: .93rem;
+      color: var(--text-mid);
+      margin-bottom: .9rem;
+      line-height: 1.65;
+    }
+    .notice-body p:last-child { margin-bottom: 0; }
+    .notice-btn {
+      display: block;
+      width: 100%;
+      margin-top: 1.5rem;
+      background: var(--navy);
+      color: var(--white);
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: .85rem;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .notice-btn:hover { background: var(--red); }
+
+    /* ── Intro notice strip below hero ──────────────────────── */
+    .pl-intro-strip {
+      background: rgba(242,183,5,.12);
+      border: 1.5px solid rgba(242,183,5,.4);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: flex-start;
+      gap: .75rem;
+      margin-bottom: 2rem;
+    }
+    .pl-intro-strip .pi-icon { font-size: 1.6rem; flex-shrink: 0; margin-top: .1rem; }
+    .pl-intro-strip p { font-size: .9rem; color: var(--text-mid); margin: 0; }
+    .pl-intro-strip strong { color: var(--navy); }
+
+    /* ── Responsive table note on small screens ──────────────── */
+    .pl-scroll-hint {
+      font-size: .75rem;
+      color: var(--text-light);
+      text-align: right;
+      padding: .25rem .5rem;
+      display: none;
+    }
+    /* ── Review / Cart Modal Overlay ─────────────────────────── */
+    #cart-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(11,31,58,.82);
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      backdrop-filter: blur(4px);
+      transition: opacity .3s ease;
+    }
+    #cart-overlay.cart-hidden { display: none; }
+    .cart-modal {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      max-width: 680px;
+      width: 100%;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0,0,0,.45);
+      border-top: 5px solid var(--gold);
+      max-height: 90vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .cart-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      border-bottom: 2px solid #f0f0f0;
+      padding-bottom: 1rem;
+    }
+    .cart-header h2 {
+      font-family: var(--font-head);
+      font-size: 1.4rem;
+      color: var(--navy);
+      margin: 0 0 .25rem;
+      font-weight: 800;
+    }
+    .cart-header p {
+      font-size: .85rem;
+      color: var(--text-mid);
+      margin: 0;
+    }
+    .cart-close {
+      background: rgba(11,31,58,.08);
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 1rem;
+      color: var(--navy);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s;
+      flex-shrink: 0;
+    }
+    .cart-close:hover { background: var(--red); color: var(--white); }
+
+    /* Cart Items — stacked cards (no table). No inner scrollbox here;
+       the outer modal (max-height:90vh) is the ONE scroll area, matching
+       the old order page's single continuous scroll pattern. */
+    .cart-items-wrap {
+      border: 1px solid #eee;
+      border-radius: var(--radius-sm);
+      padding: .5rem;
+    }
+    .cart-item-card {
+      background: var(--white);
+      border: 1px solid #eee;
+      border-radius: var(--radius-sm);
+      padding: .7rem .8rem;
+      margin-bottom: .5rem;
+    }
+    .cart-item-card:last-child { margin-bottom: 0; }
+    .cart-item-name { font-weight: 700; font-size: .98rem; line-height: 1.3; color: var(--text-dark); }
+    .cart-item-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .5rem;
+      margin-top: .2rem;
+    }
+    .cart-item-meta {
+      font-size: .8rem;
+      color: var(--text-mid);
+    }
+    .cart-item-total {
+      font-weight: 700;
+      color: var(--navy);
+      font-size: .92rem;
+      min-width: 60px;
+      text-align: right;
+      white-space: nowrap;
+    }
+    .cart-del-btn {
+      background: none;
+      border: none;
+      color: #b4432f;
+      font-size: .78rem;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0 0 0 8px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .cart-del-btn:hover { text-decoration: underline; }
+    .cart-empty-msg {
+      padding: 2rem 1rem;
+      text-align: center;
+      color: var(--text-mid);
+      font-size: .95rem;
+    }
+
+    /* Cart Summary Card */
+    .cart-summary-card {
+      background: var(--off-white);
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.25rem;
+      border-left: 4px solid var(--gold);
+    }
+    .cart-summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: .9rem;
+      color: var(--text-mid);
+      margin-bottom: .4rem;
+    }
+    .cart-summary-row.total-row {
+      border-top: 1.5px dashed #ccc;
+      padding-top: .6rem;
+      margin-top: .4rem;
+      margin-bottom: 0;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--navy);
+    }
+    .cart-summary-row.total-row span:last-child {
+      color: var(--red);
+      font-family: var(--font-head);
+      font-size: 1.3rem;
+    }
+    .cart-savings-val { color: #2e7d32; font-weight: 700; }
+    .cart-min-alert {
+      margin-top: .6rem;
+      padding: .5rem .75rem;
+      background: #ffebee;
+      border: 1px solid #ffcdd2;
+      border-radius: 4px;
+      color: #c62828;
+      font-size: .82rem;
+      font-weight: 600;
+      display: none;
+    }
+
+    /* Customer Form */
+    .cart-form-section {
+      background: #fff;
+      border: 1.5px solid #e0e0e0;
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.25rem;
+    }
+    .cart-form-section h3 {
+      font-family: var(--font-head);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin: 0 0 .75rem;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+    .cart-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .75rem;
+    }
+    .cart-form-full { grid-column: 1 / -1; }
+    .cart-field-group { display: flex; flex-direction: column; gap: .3rem; }
+    .cart-field-group label {
+      font-size: .8rem;
+      font-weight: 700;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: .03em;
+    }
+    .cart-field-group label .req { color: var(--red); }
+    .cart-input {
+      border: 1.5px solid #ccc;
+      border-radius: 6px;
+      padding: .6rem .75rem;
+      font-family: var(--font-body);
+      font-size: .9rem;
+      color: var(--navy);
+      transition: border-color .2s;
+      width: 100%;
+    }
+    .cart-input:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(242,183,5,.2);
+    }
+    .cart-input.input-error {
+      border-color: var(--red);
+      background: #fff8f8;
+    }
+
+    /* Cart Action Buttons */
+    .cart-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: .5rem;
+      flex-wrap: wrap;
+    }
+    .cart-back-btn {
+      background: var(--white);
+      color: var(--navy);
+      border: 2px solid var(--navy);
+      border-radius: var(--radius-sm);
+      padding: .75rem 1.25rem;
+      font-family: var(--font-body);
+      font-size: .92rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .cart-back-btn:hover { background: rgba(11,31,58,.08); }
+    .cart-submit-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: var(--wa-green);
+      color: var(--white);
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: .8rem 1.5rem;
+      font-family: var(--font-body);
+      font-size: .95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .2s, transform .2s;
+      margin-left: auto;
+    }
+    .cart-submit-btn:hover:not([disabled]) {
+      background: var(--wa-dark);
+      transform: translateY(-1px);
+    }
+    .cart-submit-btn[disabled],
+    .cart-submit-btn.disabled {
+      background: #888;
+      cursor: not-allowed;
+      opacity: .7;
+    }
+    .cart-submit-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+    @media (max-width: 600px) {
+      .cart-form-grid { grid-template-columns: 1fr; }
+      .cart-actions { flex-direction: column; width: 100%; }
+      .cart-back-btn, .cart-submit-btn { width: 100%; justify-content: center; }
+
+      /* Stack meta above total+remove on narrow screens so the
+         "pack · qty × price" text never gets squeezed mid-line */
+      /* Keep meta · amount · Remove on ONE line, matching the
+         reference page exactly — shrink instead of wrapping */
+      .cart-item-name { font-size: .92rem; }
+      .cart-item-meta { font-size: .74rem; }
+      .cart-item-total { font-size: .85rem; min-width: 44px; }
+      .cart-del-btn { font-size: .72rem; padding-left: 6px; }
+      .cart-item-row { gap: .35rem; }
+    }
+  </style>
+</head>
+<body class="pl-page">
+
+  <!-- ==============================================================
+       CUSTOMER NOTICE MODAL
+       ──────────────────────────────────────────────────────────────
+       To edit the notice text: change NOTICE_HEADING and NOTICE_BODY
+       in the <script> block at the bottom of this file.
+       Do NOT touch this HTML block to change the text content.
+       ============================================================== -->
+  <div id="notice-overlay" class="notice-hidden" role="dialog" aria-modal="true" aria-labelledby="notice-heading-el">
+    <div class="notice-modal">
+      <button class="notice-close" id="notice-close" aria-label="Close notice">✕</button>
+      <div class="notice-icon">⚠️</div>
+      <h2 id="notice-heading-el" class="notice-heading"><!-- filled by JS --></h2>
+      <div class="notice-body"><!-- filled by JS --></div>
+      <button class="notice-btn" id="notice-ok">I Understand – Browse Price List</button>
+    </div>
+  </div>
+
+  <!-- ==============================================================
+       REVIEW / CART ESTIMATE MODAL
+       ============================================================== -->
+  <div id="cart-overlay" class="cart-hidden" role="dialog" aria-modal="true" aria-labelledby="cart-heading-el">
+    <div class="cart-modal">
+      <div class="cart-header">
+        <div>
+          <h2 id="cart-heading-el">📋 Review Your Estimate</h2>
+          <p>Verify your selected items and provide your details to send via WhatsApp</p>
+        </div>
+        <button type="button" class="cart-close" id="cart-close" aria-label="Close review">✕</button>
+      </div>
+
+      <!-- Customer Details Form (shown first, matching approved reference) -->
+      <div class="cart-form-section">
+        <h3>👤 Estimate To (Customer Details)</h3>
+        <div class="cart-form-grid">
+          <div class="cart-field-group">
+            <label for="cust-name">Full Name <span class="req">*</span></label>
+            <input type="text" id="cust-name" class="cart-input" placeholder="e.g. Karthik Raja" required autocomplete="name">
+          </div>
+          <div class="cart-field-group">
+            <label for="cust-mobile">Mobile Number <span class="req">*</span></label>
+            <input type="tel" id="cust-mobile" class="cart-input" placeholder="10-digit mobile number" maxlength="10" required autocomplete="tel">
+          </div>
+          <div class="cart-field-group cart-form-full">
+            <label for="cust-address">Delivery Address &amp; Town / District <span class="req">*</span></label>
+            <textarea id="cust-address" class="cart-input" rows="2" placeholder="Street Address, City/Town, Pincode" required autocomplete="street-address"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cart Items List Container -->
+      <div id="cart-items-container">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Estimate Summary Card -->
+      <div class="cart-summary-card">
+        <div class="cart-summary-row">
+          <span>Total MRP Value:</span>
+          <span id="cart-mrp-total">₹0</span>
+        </div>
+        <div class="cart-summary-row">
+          <span>You Save (Diwali Discount):</span>
+          <span class="cart-savings-val" id="cart-savings">₹0 (0% off)</span>
+        </div>
+        <div class="cart-summary-row total-row">
+          <span>Grand Estimate Total:</span>
+          <span id="cart-grand-total">₹0</span>
+        </div>
+        <div id="cart-min-alert" class="cart-min-alert" role="alert">
+          ⚠️ Minimum estimate value is ₹3,000. Please return to the price list to add more items.
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="cart-actions">
+        <button type="button" class="cart-back-btn" id="cart-back-btn">← Back to Price List</button>
+        <button type="button" class="cart-submit-btn" id="cart-final-submit">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.524 3.659 1.435 5.168L2 22l4.832-1.424A9.956 9.956 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a7.96 7.96 0 01-4.065-1.11l-.292-.173-3.026.793.808-2.942-.19-.302A7.99 7.99 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
+          Send Estimate via WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Bar -->
+  <div id="top-bar"><div class="container"><div class="top-bar-inner">
+    <div class="top-bar-item">📍 Vembakottai, Virudhunagar – Delivering across Tamil Nadu &amp; Bangalore</div>
+    <div class="top-bar-item">📞 <a href="tel:+919444813377">+91 94448 13377</a> &nbsp;|&nbsp; 🟢 <a href="https://wa.me/919444813377" target="_blank" rel="noopener">WhatsApp Now</a></div>
+  </div></div></div>
+
+  <!-- Site Header -->
+  <header id="site-header"><div class="container"><div class="header-inner">
+    <a href="index.html" class="site-logo"><img src="assets/images/logo.png" alt="Maha Pattasu Logo"><div class="logo-text"><span class="logo-name">Maha Pattasu</span><span class="logo-sub">Sri Mahalakshmi Pyro</span></div></a>
+    <nav class="primary-nav" aria-label="Primary navigation">
+      <a href="index.html" class="nav-link" data-nav-page="index.html">Home</a>
+      <a href="about.html" class="nav-link" data-nav-page="about.html">About</a>
+      <div class="nav-dropdown">
+        <a href="products.html" class="nav-link">Products</a>
+        <div class="dropdown-menu">
+          <a href="sound-crackers.html" class="dropdown-item"><span class="di-icon">💥</span> Sound Crackers</a>
+          <a href="sparklers-fountains.html" class="dropdown-item"><span class="di-icon">✨</span> Sparklers &amp; Fountains</a>
+          <a href="fancy-crackers.html" class="dropdown-item"><span class="di-icon">🌸</span> Fancy Crackers</a>
+          <a href="rockets-sky-shots.html" class="dropdown-item"><span class="di-icon">🚀</span> Rockets &amp; Sky Shots</a>
+          <a href="kids-gift-boxes.html" class="dropdown-item"><span class="di-icon">🎁</span> Kids Gift Boxes</a>
+          <a href="vip-family-combo-packs.html" class="dropdown-item"><span class="di-icon">👑</span> VIP Combo Packs</a>
+        </div>
+      </div>
+      <a href="safety-tips.html" class="nav-link" data-nav-page="safety-tips.html">Safety Tips</a>
+      <a href="reviews.html" class="nav-link" data-nav-page="reviews.html">Reviews</a>
+      <a href="contact.html" class="nav-link" data-nav-page="contact.html">Contact</a>
+    </nav>
+    <div class="header-cta">
+      <a href="price-list.html" class="btn btn-outline btn-sm">🛒 Order Online</a>
+      <a href="tel:+919444813377" class="btn btn-outline btn-sm">📞 Call Now</a>
+      <a href="https://wa.me/919444813377?text=Hello%20Maha%20Pattasu!%20I%20would%20like%20to%20get%20a%20price%20estimate%20for%20crackers." class="btn btn-wa btn-sm" target="_blank" rel="noopener">
+        <svg class="wa-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.524 3.659 1.435 5.168L2 22l4.832-1.424A9.956 9.956 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a7.96 7.96 0 01-4.065-1.11l-.292-.173-3.026.793.808-2.942-.19-.302A7.99 7.99 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+    <button id="hamburger" aria-label="Toggle mobile menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div></div></header>
+
+  <!-- Mobile Nav -->
+  <nav id="mobile-nav" aria-label="Mobile navigation">
+    <a href="index.html" class="mob-nav-link">🏠 Home</a><a href="about.html" class="mob-nav-link">ℹ️ About Us</a>
+    <div class="mob-nav-section">Products</div>
+    <a href="sound-crackers.html" class="mob-nav-link">💥 Sound Crackers</a><a href="sparklers-fountains.html" class="mob-nav-link">✨ Sparklers &amp; Fountains</a><a href="fancy-crackers.html" class="mob-nav-link">🌸 Fancy Crackers</a><a href="rockets-sky-shots.html" class="mob-nav-link">🚀 Rockets &amp; Sky Shots</a><a href="kids-gift-boxes.html" class="mob-nav-link">🎁 Kids Gift Boxes</a><a href="vip-family-combo-packs.html" class="mob-nav-link">👑 VIP Combo Packs</a>
+    <a href="safety-tips.html" class="mob-nav-link">🛡️ Safety Tips</a>
+    <a href="reviews.html" class="mob-nav-link" data-nav-page="reviews.html">⭐ Reviews</a>
+    <a href="contact.html" class="mob-nav-link">📞 Contact</a>
+    <div class="mob-cta-group">
+      <a href="tel:+919444813377" class="btn btn-outline" style="justify-content:center;">📞 Call Mr. Deva Rajan</a>
+      <a href="https://wa.me/919444813377?text=Hello%20Maha%20Pattasu!%20Please%20share%20your%20price%20list." class="btn btn-wa" target="_blank" rel="noopener" style="justify-content:center;">WhatsApp Now – Get Your Discount</a>
+    </div>
+  </nav>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="container"><div class="page-hero-content">
+      <span class="section-label">Sivakasi Crackers</span>
+      <h1>🎆 Full Price List &amp; Estimate</h1>
+      <p>Browse all categories, add your quantities, and send a price estimate via WhatsApp. Our team will confirm availability and pricing within 24 hours.</p>
+      <nav class="breadcrumb" aria-label="Breadcrumb" style="margin-top:1.5rem;">
+        <a href="index.html">Home</a><span class="breadcrumb-sep">›</span><span>Price List &amp; Estimate</span>
+      </nav>
+    </div></div>
+  </section>
+
+  <!-- Estimate Tool Section -->
+  <section class="section pl-section">
+    <div class="container">
+
+      <!-- Intro notice -->
+      <div class="pl-intro-strip">
+        <div class="pi-icon">📋</div>
+        <p><strong>This is a price estimate tool, not an online order form.</strong> Set quantities using the +/– buttons, then tap "Send Estimate via WhatsApp" at the bottom. Minimum estimate value is ₹3,000. Prices shown are current Deepavali Sale rates — subject to change without prior notice.</p>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════════
+           CATEGORY 1 — SOUND CRACKERS
+           ══════════════════════════════════════════════════════════ -->
+      <section class="pl-category-section" data-category="SOUND CRACKERS">
+        <h2 class="pl-category-heading"><span class="pl-cat-icon">💥</span> Sound Crackers</h2>
+
+        <!-- Sub-group: One Sound Crackers -->
+        <div class="pl-subgroup-wrap">
+          <h3 class="pl-subgroup-heading">One Sound Crackers</h3>
+          <div class="pl-cards-wrap"><div class="pl-item-card" data-row data-name="2 3/4&quot; Kuruvi" data-pack="Pkt (5 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">💥</div><div class="pl-item-info"><div class="pl-name">2 3/4" Kuruvi</div><div class="pl-pack">Pkt (5 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹50</span><span class="pl-price-val">₹10</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sc-1"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="10" data-mrp="50" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="3 1/2&quot; Lakshmi" data-pack="Pkt (5 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">💥</div><div class="pl-item-info"><div class="pl-name">3 1/2" Lakshmi</div><div class="pl-pack">Pkt (5 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹100</span><span class="pl-price-val">₹20</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sc-2"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="20" data-mrp="100" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="4&quot; Lakshmi" data-pack="Pkt (5 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">💥</div><div class="pl-item-info"><div class="pl-name">4" Lakshmi</div><div class="pl-pack">Pkt (5 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹120</span><span class="pl-price-val">₹24</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sc-3"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="24" data-mrp="120" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="4&quot; Lakshmi Delux" data-pack="Pkt (5 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">💥</div><div class="pl-item-info"><div class="pl-name">4" Lakshmi Delux</div><div class="pl-pack">Pkt (5 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹180</span><span class="pl-price-val">₹36</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sc-4"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="36" data-mrp="180" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Gold Lakshmi" data-pack="Pkt (5 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">💥</div><div class="pl-item-info"><div class="pl-name">Gold Lakshmi</div><div class="pl-pack">Pkt (5 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹220</span><span class="pl-price-val">₹44</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sc-5"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="44" data-mrp="220" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="2 Sound Blast" data-pack="Pkt (5 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">💥</div><div class="pl-item-info"><div class="pl-name">2 Sound Blast</div><div class="pl-pack">Pkt (5 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹240</span><span class="pl-price-val">₹48</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sc-6"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="48" data-mrp="240" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="5&quot; Super Delux Special" data-pack="Pkt (5 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">💥</div><div class="pl-item-info"><div class="pl-name">5" Super Delux Special</div><div class="pl-pack">Pkt (5 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹260</span><span class="pl-price-val">₹52</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sc-7"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="52" data-mrp="260" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="6&quot; Yanai Vedi" data-pack="Pkt (5 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">💥</div><div class="pl-item-info"><div class="pl-name">6" Yanai Vedi</div><div class="pl-pack">Pkt (5 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹320</span><span class="pl-price-val">₹64</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sc-8"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="64" data-mrp="320" data-amount="0">₹0</span></div></div></div></div>
+
+          <!-- Sub-group: Blast Bomb -->
+          <h3 class="pl-subgroup-heading">Blast Bomb</h3>
+          <div class="pl-cards-wrap"><div class="pl-item-card" data-row data-name="Bullet Bomb" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">💥</div><div class="pl-item-info"><div class="pl-name">Bullet Bomb</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹150</span><span class="pl-price-val">₹30</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sc-9"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="30" data-mrp="150" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Mega Bullet Bomb" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">💥</div><div class="pl-item-info"><div class="pl-name">Mega Bullet Bomb</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹320</span><span class="pl-price-val">₹64</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sc-10"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="64" data-mrp="320" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Hydro Bomb" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">💥</div><div class="pl-item-info"><div class="pl-name">Hydro Bomb</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹430</span><span class="pl-price-val">₹86</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sc-11"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="86" data-mrp="430" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="King of King" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">💥</div><div class="pl-item-info"><div class="pl-name">King of King</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹500</span><span class="pl-price-val">₹100</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sc-12"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="100" data-mrp="500" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Classic Bomb" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">💥</div><div class="pl-item-info"><div class="pl-name">Classic Bomb</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹700</span><span class="pl-price-val">₹140</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sc-13"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="140" data-mrp="700" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Ultra Bomb" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">💥</div><div class="pl-item-info"><div class="pl-name">Ultra Bomb</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹900</span><span class="pl-price-val">₹180</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sc-14"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="180" data-mrp="900" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Digital Bomb" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">💥</div><div class="pl-item-info"><div class="pl-name">Digital Bomb</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹1,200</span><span class="pl-price-val">₹240</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sc-15"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="240" data-mrp="1200" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Rider Bomb" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">💥</div><div class="pl-item-info"><div class="pl-name">Rider Bomb</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹1,600</span><span class="pl-price-val">₹320</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sc-16"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="320" data-mrp="1600" data-amount="0">₹0</span></div></div></div></div>
+
+          <!-- Sub-group: Paper Bomb -->
+          <h3 class="pl-subgroup-heading">Paper Bomb</h3>
+          <div class="pl-cards-wrap"><div class="pl-item-card" data-row data-name="1/4 Kg Adiyal" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">💥</div><div class="pl-item-info"><div class="pl-name">1/4 Kg Adiyal</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹220</span><span class="pl-price-val">₹44</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sc-17"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="44" data-mrp="220" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="1/2 Kg Adiyal" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">💥</div><div class="pl-item-info"><div class="pl-name">1/2 Kg Adiyal</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹440</span><span class="pl-price-val">₹88</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sc-18"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="88" data-mrp="440" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="1 Kg Adiyal" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">💥</div><div class="pl-item-info"><div class="pl-name">1 Kg Adiyal</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹880</span><span class="pl-price-val">₹176</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sc-19"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="176" data-mrp="880" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Hacker Bomb" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">💥</div><div class="pl-item-info"><div class="pl-name">Hacker Bomb</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹200</span><span class="pl-price-val">₹40</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sc-20"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="40" data-mrp="200" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Hacker Bomb" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">💥</div><div class="pl-item-info"><div class="pl-name">Hacker Bomb</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹1,900</span><span class="pl-price-val">₹380</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sc-21"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="380" data-mrp="1900" data-amount="0">₹0</span></div></div></div></div>
+
+          <!-- Sub-group: Repeating Bijili -->
+          <h3 class="pl-subgroup-heading">Repeating Bijili</h3>
+          <div class="pl-cards-wrap"><div class="pl-item-card" data-row data-name="Bijili Red" data-pack="Bag (50 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">💥</div><div class="pl-item-info"><div class="pl-name">Bijili Red</div><div class="pl-pack">Bag (50 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹100</span><span class="pl-price-val">₹20</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sc-22"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="20" data-mrp="100" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Bijili Red" data-pack="Bag (100 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">💥</div><div class="pl-item-info"><div class="pl-name">Bijili Red</div><div class="pl-pack">Bag (100 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹200</span><span class="pl-price-val">₹40</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sc-23"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="40" data-mrp="200" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Bijili Kakki" data-pack="Bag (50 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">💥</div><div class="pl-item-info"><div class="pl-name">Bijili Kakki</div><div class="pl-pack">Bag (50 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹140</span><span class="pl-price-val">₹28</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sc-24"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="28" data-mrp="140" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Bijili Kakki" data-pack="Bag (100 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">💥</div><div class="pl-item-info"><div class="pl-name">Bijili Kakki</div><div class="pl-pack">Bag (100 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹220</span><span class="pl-price-val">₹44</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sc-25"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="44" data-mrp="220" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="100 Watts" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">💥</div><div class="pl-item-info"><div class="pl-name">100 Watts</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹220</span><span class="pl-price-val">₹44</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sc-26"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="44" data-mrp="220" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="1000 Watts" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">💥</div><div class="pl-item-info"><div class="pl-name">1000 Watts</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹1,000</span><span class="pl-price-val">₹200</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sc-27"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="200" data-mrp="1000" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="2000 Watts" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">💥</div><div class="pl-item-info"><div class="pl-name">2000 Watts</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹2,000</span><span class="pl-price-val">₹400</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sc-28"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="400" data-mrp="2000" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="5000 Watts" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">💥</div><div class="pl-item-info"><div class="pl-name">5000 Watts</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹5,000</span><span class="pl-price-val">₹1,000</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sc-29"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="1000" data-mrp="5000" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="10000 Watts" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">💥</div><div class="pl-item-info"><div class="pl-name">10000 Watts</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹10,000</span><span class="pl-price-val">₹2,000</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sc-30"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="2000" data-mrp="10000" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="1000 Watts Special" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">💥</div><div class="pl-item-info"><div class="pl-name">1000 Watts Special</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹1,800</span><span class="pl-price-val">₹360</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sc-31"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="360" data-mrp="1800" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="2000 Watts Special" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">💥</div><div class="pl-item-info"><div class="pl-name">2000 Watts Special</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹3,600</span><span class="pl-price-val">₹720</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sc-32"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="720" data-mrp="3600" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="5000 Watts Special" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">💥</div><div class="pl-item-info"><div class="pl-name">5000 Watts Special</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹9,000</span><span class="pl-price-val">₹1,800</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sc-33"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="1800" data-mrp="9000" data-amount="0">₹0</span></div></div></div></div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════
+           CATEGORY 2 — SPARKLERS & FOUNTAINS
+           ══════════════════════════════════════════════════════════ -->
+      <section class="pl-category-section" data-category="SPARKLERS &amp; FOUNTAINS">
+        <h2 class="pl-category-heading"><span class="pl-cat-icon">✨</span> Sparklers &amp; Fountains</h2>
+        <div class="pl-subgroup-wrap">
+          <h3 class="pl-subgroup-heading">Sparklers</h3>
+          <div class="pl-cards-wrap"><div class="pl-item-card" data-row data-name="10cm Electric" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">✨</div><div class="pl-item-info"><div class="pl-name">10cm Electric</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹90</span><span class="pl-price-val">₹18</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sf-1"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="18" data-mrp="90" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="10cm Crackling" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">✨</div><div class="pl-item-info"><div class="pl-name">10cm Crackling</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹130</span><span class="pl-price-val">₹26</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sf-2"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="26" data-mrp="130" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="10cm Green" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">✨</div><div class="pl-item-info"><div class="pl-name">10cm Green</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹160</span><span class="pl-price-val">₹32</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sf-3"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="32" data-mrp="160" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="10cm Red" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">✨</div><div class="pl-item-info"><div class="pl-name">10cm Red</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹170</span><span class="pl-price-val">₹34</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sf-4"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="34" data-mrp="170" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="15cm Electric" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">✨</div><div class="pl-item-info"><div class="pl-name">15cm Electric</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹220</span><span class="pl-price-val">₹44</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sf-5"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="44" data-mrp="220" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="15cm Crackling" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">✨</div><div class="pl-item-info"><div class="pl-name">15cm Crackling</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹250</span><span class="pl-price-val">₹50</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sf-6"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="50" data-mrp="250" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="15cm Green" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">✨</div><div class="pl-item-info"><div class="pl-name">15cm Green</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹300</span><span class="pl-price-val">₹60</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sf-7"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="60" data-mrp="300" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="15cm Red" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">✨</div><div class="pl-item-info"><div class="pl-name">15cm Red</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹360</span><span class="pl-price-val">₹72</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sf-8"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="72" data-mrp="360" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="30cm Electric" data-pack="Box (5 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">✨</div><div class="pl-item-info"><div class="pl-name">30cm Electric</div><div class="pl-pack">Box (5 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹220</span><span class="pl-price-val">₹44</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sf-9"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="44" data-mrp="220" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="30cm Crackling" data-pack="Box (5 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">✨</div><div class="pl-item-info"><div class="pl-name">30cm Crackling</div><div class="pl-pack">Box (5 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹250</span><span class="pl-price-val">₹50</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sf-10"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="50" data-mrp="250" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="30cm Green" data-pack="Box (5 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">✨</div><div class="pl-item-info"><div class="pl-name">30cm Green</div><div class="pl-pack">Box (5 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹300</span><span class="pl-price-val">₹60</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sf-11"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="60" data-mrp="300" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="30cm Red" data-pack="Box (5 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">✨</div><div class="pl-item-info"><div class="pl-name">30cm Red</div><div class="pl-pack">Box (5 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹360</span><span class="pl-price-val">₹72</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sf-12"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="72" data-mrp="360" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="50cm Electric" data-pack="Box (5 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">✨</div><div class="pl-item-info"><div class="pl-name">50cm Electric</div><div class="pl-pack">Box (5 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹800</span><span class="pl-price-val">₹160</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sf-13"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="160" data-mrp="800" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="50cm Color" data-pack="Box (5 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">✨</div><div class="pl-item-info"><div class="pl-name">50cm Color</div><div class="pl-pack">Box (5 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹900</span><span class="pl-price-val">₹180</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sf-14"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="180" data-mrp="900" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="50cm Multi Color" data-pack="Box (5 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">✨</div><div class="pl-item-info"><div class="pl-name">50cm Multi Color</div><div class="pl-pack">Box (5 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹1,100</span><span class="pl-price-val">₹220</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sf-15"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="220" data-mrp="1100" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Rotating Sparkler" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">✨</div><div class="pl-item-info"><div class="pl-name">Rotating Sparkler</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹1,400</span><span class="pl-price-val">₹280</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sf-16"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="280" data-mrp="1400" data-amount="0">₹0</span></div></div></div></div>
+
+          <h3 class="pl-subgroup-heading">Fountains</h3>
+          <div class="pl-cards-wrap"><div class="pl-item-card" data-row data-name="Crackling Tree" data-pack="Box (3 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">✨</div><div class="pl-item-info"><div class="pl-name">Crackling Tree</div><div class="pl-pack">Box (3 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹1,800</span><span class="pl-price-val">₹360</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sf-17"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="360" data-mrp="1800" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="4&quot; Special (Silver Tree)" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">✨</div><div class="pl-item-info"><div class="pl-name">4" Special (Silver Tree)</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹450</span><span class="pl-price-val">₹90</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sf-18"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="90" data-mrp="450" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="4&quot; Fountain (Tri Color)" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">✨</div><div class="pl-item-info"><div class="pl-name">4" Fountain (Tri Color)</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹450</span><span class="pl-price-val">₹90</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sf-19"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="90" data-mrp="450" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Magical Siren" data-pack="Box (3 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">✨</div><div class="pl-item-info"><div class="pl-name">Magical Siren</div><div class="pl-pack">Box (3 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹900</span><span class="pl-price-val">₹180</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sf-20"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="180" data-mrp="900" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Peacock Feathers" data-pack="Box (5 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">✨</div><div class="pl-item-info"><div class="pl-name">Peacock Feathers</div><div class="pl-pack">Box (5 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹450</span><span class="pl-price-val">₹90</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sf-21"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="90" data-mrp="450" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Golden Drops" data-pack="Box (5 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">✨</div><div class="pl-item-info"><div class="pl-name">Golden Drops</div><div class="pl-pack">Box (5 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹450</span><span class="pl-price-val">₹90</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sf-22"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="90" data-mrp="450" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Rock Star Fountain" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">✨</div><div class="pl-item-info"><div class="pl-name">Rock Star Fountain</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹480</span><span class="pl-price-val">₹96</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sf-23"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="96" data-mrp="480" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Tirumalai 2-Step Fountain" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">✨</div><div class="pl-item-info"><div class="pl-name">Tirumalai 2-Step Fountain</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹750</span><span class="pl-price-val">₹150</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sf-24"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="150" data-mrp="750" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Special Shower 5-in-1" data-pack="Box (5 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">✨</div><div class="pl-item-info"><div class="pl-name">Special Shower 5-in-1</div><div class="pl-pack">Box (5 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹480</span><span class="pl-price-val">₹96</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sf-25"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="96" data-mrp="480" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Sky Shot Special" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">✨</div><div class="pl-item-info"><div class="pl-name">Sky Shot Special</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹700</span><span class="pl-price-val">₹140</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-sf-26"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="140" data-mrp="700" data-amount="0">₹0</span></div></div></div></div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════
+           CATEGORY 3 — FANCY CRACKERS
+           ══════════════════════════════════════════════════════════ -->
+      <section class="pl-category-section" data-category="FANCY CRACKERS">
+        <h2 class="pl-category-heading"><span class="pl-cat-icon">🌸</span> Fancy Crackers</h2>
+        <div class="pl-subgroup-wrap">
+
+          <h3 class="pl-subgroup-heading">Fancy Sky Shots (2")</h3>
+          <div class="pl-cards-wrap"><div class="pl-item-card" data-row data-name="Fighter Kite" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🌸</div><div class="pl-item-info"><div class="pl-name">Fighter Kite</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹240</span><span class="pl-price-val">₹48</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-fc-1"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="48" data-mrp="240" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="King of All" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🌸</div><div class="pl-item-info"><div class="pl-name">King of All</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹240</span><span class="pl-price-val">₹48</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-fc-2"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="48" data-mrp="240" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Red Hots" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🌸</div><div class="pl-item-info"><div class="pl-name">Red Hots</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹240</span><span class="pl-price-val">₹48</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-fc-3"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="48" data-mrp="240" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Thunder Shower" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🌸</div><div class="pl-item-info"><div class="pl-name">Thunder Shower</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹240</span><span class="pl-price-val">₹48</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-fc-4"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="48" data-mrp="240" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Sky Shot Crackling" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🌸</div><div class="pl-item-info"><div class="pl-name">Sky Shot Crackling</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹100</span><span class="pl-price-val">₹20</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-fc-5"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="20" data-mrp="100" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Hero Sky Shot" data-pack="Box (2 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🌸</div><div class="pl-item-info"><div class="pl-name">Hero Sky Shot</div><div class="pl-pack">Box (2 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹250</span><span class="pl-price-val">₹50</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-fc-6"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="50" data-mrp="250" data-amount="0">₹0</span></div></div></div></div>
+
+          <h3 class="pl-subgroup-heading">Fancy Single Shots</h3>
+          <div class="pl-cards-wrap"><div class="pl-item-card" data-row data-name="2&quot; Fancy Pipe (4 Varieties)" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🌸</div><div class="pl-item-info"><div class="pl-name">2" Fancy Pipe (4 Varieties)</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹430</span><span class="pl-price-val">₹86</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-fc-7"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="86" data-mrp="430" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="2&quot; Special - 3 Step" data-pack="Box (3 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🌸</div><div class="pl-item-info"><div class="pl-name">2" Special – 3 Step</div><div class="pl-pack">Box (3 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹1,800</span><span class="pl-price-val">₹360</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-fc-8"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="360" data-mrp="1800" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="2&quot; Fancy (3 Pcs)" data-pack="Box (3 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🌸</div><div class="pl-item-info"><div class="pl-name">2" Fancy (3 Pcs)</div><div class="pl-pack">Box (3 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹1,400</span><span class="pl-price-val">₹280</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-fc-9"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="280" data-mrp="1400" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="2 1/2&quot; Fancy Pipes (5 Varieties)" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🌸</div><div class="pl-item-info"><div class="pl-name">2 1/2" Fancy Pipes (5 Varieties)</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹800</span><span class="pl-price-val">₹160</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-fc-10"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="160" data-mrp="800" data-amount="0">₹0</span></div></div></div></div>
+
+          <h3 class="pl-subgroup-heading">3.5" Fancy Sky Wonders</h3>
+          <div class="pl-cards-wrap"><div class="pl-item-card" data-row data-name="3.5&quot; Fancy Pipe (4 Varieties)" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🌸</div><div class="pl-item-info"><div class="pl-name">3.5" Fancy Pipe (4 Varieties)</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹1,400</span><span class="pl-price-val">₹280</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-fc-11"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="280" data-mrp="1400" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="3.5&quot; Nayagara Sol" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🌸</div><div class="pl-item-info"><div class="pl-name">3.5" Nayagara Sol</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹1,600</span><span class="pl-price-val">₹320</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-fc-12"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="320" data-mrp="1600" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="3.5&quot; Double Ball Special" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🌸</div><div class="pl-item-info"><div class="pl-name">3.5" Double Ball Special</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹2,400</span><span class="pl-price-val">₹480</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-fc-13"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="480" data-mrp="2400" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="3.5&quot; Double Pack" data-pack="Box (2 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🌸</div><div class="pl-item-info"><div class="pl-name">3.5" Double Pack</div><div class="pl-pack">Box (2 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹2,600</span><span class="pl-price-val">₹520</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-fc-14"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="520" data-mrp="2600" data-amount="0">₹0</span></div></div></div></div>
+
+          <h3 class="pl-subgroup-heading">4" Fancy Sky Wonders</h3>
+          <div class="pl-cards-wrap"><div class="pl-item-card" data-row data-name="4&quot; Fancy Pipe (4 Varieties)" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🌸</div><div class="pl-item-info"><div class="pl-name">4" Fancy Pipe (4 Varieties)</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹1,400</span><span class="pl-price-val">₹280</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-fc-15"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="280" data-mrp="1400" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="4&quot; Nayagara Sol" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🌸</div><div class="pl-item-info"><div class="pl-name">4" Nayagara Sol</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹1,600</span><span class="pl-price-val">₹320</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-fc-16"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="320" data-mrp="1600" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="4&quot; Double Ball Special" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🌸</div><div class="pl-item-info"><div class="pl-name">4" Double Ball Special</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹2,400</span><span class="pl-price-val">₹480</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-fc-17"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="480" data-mrp="2400" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="4&quot; Double Pack" data-pack="Box (2 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🌸</div><div class="pl-item-info"><div class="pl-name">4" Double Pack</div><div class="pl-pack">Box (2 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹2,600</span><span class="pl-price-val">₹520</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-fc-18"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="520" data-mrp="2600" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="4&quot; Seven Steps Special" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🌸</div><div class="pl-item-info"><div class="pl-name">4" Seven Steps Special</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹2,200</span><span class="pl-price-val">₹440</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-fc-19"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="440" data-mrp="2200" data-amount="0">₹0</span></div></div></div></div>
+
+          <h3 class="pl-subgroup-heading">Multi Color Budget Thunders</h3>
+          <div class="pl-cards-wrap"><div class="pl-item-card" data-row data-name="30 Multi Color Shot (Budget)" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🌸</div><div class="pl-item-info"><div class="pl-name">30 Multi Color Shot</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹1,850</span><span class="pl-price-val">₹370</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-fc-20"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="370" data-mrp="1850" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="60 Multi Color Shot (Budget)" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🌸</div><div class="pl-item-info"><div class="pl-name">60 Multi Color Shot</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹3,700</span><span class="pl-price-val">₹740</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-fc-21"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="740" data-mrp="3700" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="120 Multi Color Shot (Budget)" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🌸</div><div class="pl-item-info"><div class="pl-name">120 Multi Color Shot</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹7,500</span><span class="pl-price-val">₹1,500</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-fc-22"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="1500" data-mrp="7500" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="30 Shot Peacock Dance" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🌸</div><div class="pl-item-info"><div class="pl-name">30 Shot Peacock Dance</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹2,000</span><span class="pl-price-val">₹400</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-fc-23"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="400" data-mrp="2000" data-amount="0">₹0</span></div></div></div></div>
+
+          <h3 class="pl-subgroup-heading">Multi Color Brand Thunders</h3>
+          <div class="pl-cards-wrap"><div class="pl-item-card" data-row data-name="7 Shot Color" data-pack="Box (5 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🌸</div><div class="pl-item-info"><div class="pl-name">7 Shot Color</div><div class="pl-pack">Box (5 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹600</span><span class="pl-price-val">₹120</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-fc-24"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="120" data-mrp="600" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="12 Shot Rider" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🌸</div><div class="pl-item-info"><div class="pl-name">12 Shot Rider</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹800</span><span class="pl-price-val">₹160</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-fc-25"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="160" data-mrp="800" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="12 Shot Sizzling" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🌸</div><div class="pl-item-info"><div class="pl-name">12 Shot Sizzling</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹1,000</span><span class="pl-price-val">₹200</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-fc-26"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="200" data-mrp="1000" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="12 Shot Special" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🌸</div><div class="pl-item-info"><div class="pl-name">12 Shot Special</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹1,100</span><span class="pl-price-val">₹220</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-fc-27"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="220" data-mrp="1100" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="30 Multi Color Shot (Brand)" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🌸</div><div class="pl-item-info"><div class="pl-name">30 Multi Color Shot (Brand)</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹2,000</span><span class="pl-price-val">₹400</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-fc-28"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="400" data-mrp="2000" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="60 Multi Color Shot (Brand)" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🌸</div><div class="pl-item-info"><div class="pl-name">60 Multi Color Shot (Brand)</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹4,000</span><span class="pl-price-val">₹800</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-fc-29"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="800" data-mrp="4000" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="120 Multi Color Shot (Brand)" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🌸</div><div class="pl-item-info"><div class="pl-name">120 Multi Color Shot (Brand)</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹8,000</span><span class="pl-price-val">₹1,600</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-fc-30"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="1600" data-mrp="8000" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="240 Multi Color Shot" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🌸</div><div class="pl-item-info"><div class="pl-name">240 Multi Color Shot</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹16,000</span><span class="pl-price-val">₹3,200</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-fc-31"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="3200" data-mrp="16000" data-amount="0">₹0</span></div></div></div></div>
+
+          <h3 class="pl-subgroup-heading">Beautiful Sky</h3>
+          <div class="pl-cards-wrap"><div class="pl-item-card" data-row data-name="Sizzling Celebration 5x10" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🌸</div><div class="pl-item-info"><div class="pl-name">Sizzling Celebration 5x10</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹12,000</span><span class="pl-price-val">₹2,400</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-fc-32"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="2400" data-mrp="12000" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Sizzling Celebration 10x10" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🌸</div><div class="pl-item-info"><div class="pl-name">Sizzling Celebration 10x10</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹22,000</span><span class="pl-price-val">₹4,400</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-fc-33"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="4400" data-mrp="22000" data-amount="0">₹0</span></div></div></div></div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════
+           CATEGORY 4 — ROCKETS, FLOWER POTS & CHAKKARS
+           ══════════════════════════════════════════════════════════ -->
+      <section class="pl-category-section" data-category="ROCKETS, FLOWER POTS &amp; CHAKKARS">
+        <h2 class="pl-category-heading"><span class="pl-cat-icon">🚀</span> Rockets, Flower Pots &amp; Chakkars</h2>
+        <div class="pl-subgroup-wrap">
+
+          <h3 class="pl-subgroup-heading">Flower Pot</h3>
+          <div class="pl-cards-wrap"><div class="pl-item-card" data-row data-name="Flower Pot Small" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🚀</div><div class="pl-item-info"><div class="pl-name">Flower Pot Small</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹360</span><span class="pl-price-val">₹72</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-rk-1"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="72" data-mrp="360" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Flower Pot Big" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🚀</div><div class="pl-item-info"><div class="pl-name">Flower Pot Big</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹480</span><span class="pl-price-val">₹96</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-rk-2"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="96" data-mrp="480" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Flower Pot Special" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🚀</div><div class="pl-item-info"><div class="pl-name">Flower Pot Special</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹680</span><span class="pl-price-val">₹136</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-rk-3"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="136" data-mrp="680" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Flower Pot Asoka" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🚀</div><div class="pl-item-info"><div class="pl-name">Flower Pot Asoka</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹860</span><span class="pl-price-val">₹172</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-rk-4"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="172" data-mrp="860" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Color Koti" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🚀</div><div class="pl-item-info"><div class="pl-name">Color Koti</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹1,200</span><span class="pl-price-val">₹240</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-rk-5"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="240" data-mrp="1200" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Color Koti Delux" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🚀</div><div class="pl-item-info"><div class="pl-name">Color Koti Delux</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹1,900</span><span class="pl-price-val">₹380</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-rk-6"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="380" data-mrp="1900" data-amount="0">₹0</span></div></div></div></div>
+
+          <h3 class="pl-subgroup-heading">Chakkar</h3>
+          <div class="pl-cards-wrap"><div class="pl-item-card" data-row data-name="Ground Chakkar Big" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🚀</div><div class="pl-item-info"><div class="pl-name">Ground Chakkar Big</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹200</span><span class="pl-price-val">₹40</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-rk-7"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="40" data-mrp="200" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Ground Chakkar Special" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🚀</div><div class="pl-item-info"><div class="pl-name">Ground Chakkar Special</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹400</span><span class="pl-price-val">₹80</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-rk-8"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="80" data-mrp="400" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Ground Chakkar Delux" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🚀</div><div class="pl-item-info"><div class="pl-name">Ground Chakkar Delux</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹650</span><span class="pl-price-val">₹130</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-rk-9"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="130" data-mrp="650" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Chakkar Special (Plastic) 800" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🚀</div><div class="pl-item-info"><div class="pl-name">Chakkar Special (Plastic)</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹800</span><span class="pl-price-val">₹160</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-rk-10"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="160" data-mrp="800" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Chakkar Special (Plastic) 900" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🚀</div><div class="pl-item-info"><div class="pl-name">Chakkar Special Delux (Plastic)</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹900</span><span class="pl-price-val">₹180</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-rk-11"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="180" data-mrp="900" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Disco Wheel" data-pack="Box (5 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🚀</div><div class="pl-item-info"><div class="pl-name">Disco Wheel</div><div class="pl-pack">Box (5 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹350</span><span class="pl-price-val">₹70</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-rk-12"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="70" data-mrp="350" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Twin Wheel" data-pack="Box (5 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🚀</div><div class="pl-item-info"><div class="pl-name">Twin Wheel</div><div class="pl-pack">Box (5 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹400</span><span class="pl-price-val">₹80</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-rk-13"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="80" data-mrp="400" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Wire Chakkar" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🚀</div><div class="pl-item-info"><div class="pl-name">Wire Chakkar</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹900</span><span class="pl-price-val">₹180</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-rk-14"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="180" data-mrp="900" data-amount="0">₹0</span></div></div></div></div>
+
+          <h3 class="pl-subgroup-heading">Rockets</h3>
+          <div class="pl-cards-wrap"><div class="pl-item-card" data-row data-name="Rocket Bomb" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🚀</div><div class="pl-item-info"><div class="pl-name">Rocket Bomb</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹360</span><span class="pl-price-val">₹72</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-rk-15"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="72" data-mrp="360" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Lunic Rocket" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🚀</div><div class="pl-item-info"><div class="pl-name">Lunic Rocket</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹500</span><span class="pl-price-val">₹100</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-rk-16"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="100" data-mrp="500" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Whistle Rocket" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🚀</div><div class="pl-item-info"><div class="pl-name">Whistle Rocket</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹800</span><span class="pl-price-val">₹160</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-rk-17"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="160" data-mrp="800" data-amount="0">₹0</span></div></div></div></div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════
+           CATEGORY 5 — KIDS GIFT BOXES
+           ══════════════════════════════════════════════════════════ -->
+      <section class="pl-category-section" data-category="KIDS GIFT BOXES">
+        <h2 class="pl-category-heading"><span class="pl-cat-icon">🎁</span> Kids Gift Boxes</h2>
+        <div class="pl-subgroup-wrap">
+
+          <h3 class="pl-subgroup-heading">Kids Special</h3>
+          <div class="pl-cards-wrap"><div class="pl-item-card" data-row data-name="90 Watts" data-pack="Box (3 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">90 Watts</div><div class="pl-pack">Box (3 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹600</span><span class="pl-price-val">₹120</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-1"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="120" data-mrp="600" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Dora Singer" data-pack="Box (5 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Dora Singer</div><div class="pl-pack">Box (5 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹580</span><span class="pl-price-val">₹116</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-2"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="116" data-mrp="580" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Top Gun" data-pack="Box (5 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Top Gun</div><div class="pl-pack">Box (5 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹900</span><span class="pl-price-val">₹180</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-3"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="180" data-mrp="900" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="6&quot; Water Queen" data-pack="1 Box"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">6" Water Queen</div><div class="pl-pack">1 Box</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹800</span><span class="pl-price-val">₹160</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-4"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="160" data-mrp="800" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Shin Chan" data-pack="Box (5 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Shin Chan</div><div class="pl-pack">Box (5 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹500</span><span class="pl-price-val">₹100</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-5"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="100" data-mrp="500" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Pistol 5G" data-pack="Box (2 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Pistol 5G</div><div class="pl-pack">Box (2 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹1,100</span><span class="pl-price-val">₹220</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-6"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="220" data-mrp="1100" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Bada Peacock" data-pack="1 Box"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Bada Peacock</div><div class="pl-pack">1 Box</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹1,500</span><span class="pl-price-val">₹300</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-7"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="300" data-mrp="1500" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Madurai Malli" data-pack="Box (3 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Madurai Malli</div><div class="pl-pack">Box (3 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹1,100</span><span class="pl-price-val">₹220</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-8"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="220" data-mrp="1100" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Block Money" data-pack="Box (5 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Block Money</div><div class="pl-pack">Box (5 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹1,500</span><span class="pl-price-val">₹300</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-9"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="300" data-mrp="1500" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Emu Egg" data-pack="Box (2 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Emu Egg</div><div class="pl-pack">Box (2 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹1,800</span><span class="pl-price-val">₹360</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-10"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="360" data-mrp="1800" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Golden Flower" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Golden Flower</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹500</span><span class="pl-price-val">₹100</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-11"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="100" data-mrp="500" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Kungfu Delux" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Kungfu Delux</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹400</span><span class="pl-price-val">₹80</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-12"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="80" data-mrp="400" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Color Smoke" data-pack="Box (3 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Color Smoke</div><div class="pl-pack">Box (3 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹600</span><span class="pl-price-val">₹120</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-13"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="120" data-mrp="600" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Money Bank" data-pack="Box (3 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Money Bank</div><div class="pl-pack">Box (3 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹550</span><span class="pl-price-val">₹110</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-14"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="110" data-mrp="550" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Money Bank Single" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Money Bank (Single)</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹200</span><span class="pl-price-val">₹40</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-15"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="40" data-mrp="200" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Gun + 5 Ring Cap" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Gun + 5 Ring Cap</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹500</span><span class="pl-price-val">₹100</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-16"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="100" data-mrp="500" data-amount="0">₹0</span></div></div></div></div>
+
+          <h3 class="pl-subgroup-heading">Peacock</h3>
+          <div class="pl-cards-wrap"><div class="pl-item-card" data-row data-name="Magical Peacock" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Magical Peacock</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹750</span><span class="pl-price-val">₹150</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-17"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="150" data-mrp="750" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Peacock Special" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Peacock Special</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹960</span><span class="pl-price-val">₹192</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-18"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="192" data-mrp="960" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Bada Peacock (5 Face)" data-pack="Box (1 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Bada Peacock (5 Face)</div><div class="pl-pack">Box (1 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹2,200</span><span class="pl-price-val">₹440</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-19"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="440" data-mrp="2200" data-amount="0">₹0</span></div></div></div></div>
+
+          <h3 class="pl-subgroup-heading">Color Flash</h3>
+          <div class="pl-cards-wrap"><div class="pl-item-card" data-row data-name="Color Changing Butterfly" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Color Changing Butterfly</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹400</span><span class="pl-price-val">₹80</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-20"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="80" data-mrp="400" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Helicopter - In The Sky" data-pack="Box (5 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Helicopter – In The Sky</div><div class="pl-pack">Box (5 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹460</span><span class="pl-price-val">₹92</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-21"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="92" data-mrp="460" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Drone Nights" data-pack="Box (5 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Drone Nights</div><div class="pl-pack">Box (5 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹560</span><span class="pl-price-val">₹112</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-22"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="112" data-mrp="560" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Bambaram Speed Max" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Bambaram Speed Max</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹580</span><span class="pl-price-val">₹116</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-23"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="116" data-mrp="580" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Photo Flash Insta Flash" data-pack="Box (5 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Photo Flash Insta Flash</div><div class="pl-pack">Box (5 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹260</span><span class="pl-price-val">₹52</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-24"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="52" data-mrp="260" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Selfie Stick" data-pack="Box (3 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Selfie Stick</div><div class="pl-pack">Box (3 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹280</span><span class="pl-price-val">₹56</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-25"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="56" data-mrp="280" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Kit Kat / Chit Put" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Kit Kat / Chit Put</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹200</span><span class="pl-price-val">₹40</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-26"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="40" data-mrp="200" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Electric Stone" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Electric Stone</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹120</span><span class="pl-price-val">₹24</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-27"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="24" data-mrp="120" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Magic Pops" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Magic Pops</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹100</span><span class="pl-price-val">₹20</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-28"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="20" data-mrp="100" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Snake Tablets" data-pack="Box (50 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Snake Tablets</div><div class="pl-pack">Box (50 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹300</span><span class="pl-price-val">₹60</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-29"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="60" data-mrp="300" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Lolly Pop Special" data-pack="Box (5 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Lolly Pop Special</div><div class="pl-pack">Box (5 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹800</span><span class="pl-price-val">₹160</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-30"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="160" data-mrp="800" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Cartoon" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Cartoon</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹180</span><span class="pl-price-val">₹36</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-31"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="36" data-mrp="180" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Zee Boom Baa" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Zee Boom Baa</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹100</span><span class="pl-price-val">₹20</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-32"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="20" data-mrp="100" data-amount="0">₹0</span></div></div></div></div>
+
+          <h3 class="pl-subgroup-heading">Color Match Box</h3>
+          <div class="pl-cards-wrap"><div class="pl-item-card" data-row data-name="Robin Super Delux" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Robin Super Delux</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹300</span><span class="pl-price-val">₹60</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-33"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="60" data-mrp="300" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Robin 7up Rainbow" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Robin 7up Rainbow</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹900</span><span class="pl-price-val">₹180</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-34"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="180" data-mrp="900" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Robin 10un1 Laptop" data-pack="Box (10 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Robin 10un1 Laptop</div><div class="pl-pack">Box (10 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹1,200</span><span class="pl-price-val">₹240</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-35"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="240" data-mrp="1200" data-amount="0">₹0</span></div></div></div></div>
+
+          <h3 class="pl-subgroup-heading">Color Pencils</h3>
+          <div class="pl-cards-wrap"><div class="pl-item-card" data-row data-name="Amazing Pencil" data-pack="Box (3 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Amazing Pencil</div><div class="pl-pack">Box (3 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹500</span><span class="pl-price-val">₹100</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-36"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="100" data-mrp="500" data-amount="0">₹0</span></div></div></div><div class="pl-item-card" data-row data-name="Old Is Gold" data-pack="Box (25 Pcs)"><div class="pl-item-top"><div class="pl-item-icon">🎁</div><div class="pl-item-info"><div class="pl-name">Old Is Gold</div><div class="pl-pack">Box (25 Pcs)</div></div><div class="pl-price-combined"><span class="pl-mrp-val">₹650</span><span class="pl-price-val">₹130</span></div></div><div class="pl-item-bottom"><div class="pl-qty-wrap"><button type="button" class="pl-qty-btn pl-dec" aria-label="Decrease">−</button><input type="number" class="pl-qty" value="0" min="0" max="999" id="qty-kg-37"><button type="button" class="pl-qty-btn pl-inc" aria-label="Increase">+</button></div><div class="pl-item-subtotal"><span class="pl-subtotal-label">Subtotal</span><span class="pl-line-total" data-price="130" data-mrp="650" data-amount="0">₹0</span></div></div></div></div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════
+           CATEGORY 6 — VIP COMBO PACKS (no prices — placeholder)
+           ══════════════════════════════════════════════════════════ -->
+      <section class="pl-category-section" data-category="VIP COMBO PACKS">
+        <h2 class="pl-category-heading"><span class="pl-cat-icon">👑</span> VIP Combo Packs</h2>
+        <div class="pl-vip-placeholder">
+          <div style="font-size:3rem;margin-bottom:.75rem;">👑</div>
+          <p><strong>VIP &amp; Family Combo Pack pricing is personalised</strong> — pricing depends on pack contents, order size, and delivery requirements.</p>
+          <p>Please <a href="https://wa.me/919444813377?text=Hello%20Maha%20Pattasu!%20I%20am%20interested%20in%20VIP%20and%20Family%20Combo%20Packs.%20Please%20share%20pricing%20and%20contents." target="_blank" rel="noopener">WhatsApp us</a> or call <a href="tel:+919444813377">+91 94448 13377</a> to discuss your requirements and get a custom quote.</p>
+        </div>
+      </section>
+
+    </div>
+  </section>
+
+  <!-- ── Sticky Grand Total Bar ───────────────────────────────── -->
+  <div id="pl-sticky-bar" role="region" aria-label="Estimate total">
+    <div>
+      <div class="pl-total-label">Estimate Total</div>
+      <div id="pl-grand-total">₹0</div>
+      <div id="pl-min-warning" role="alert">⚠ Minimum estimate is ₹3,000 — please add more items</div>
+    </div>
+    <button type="button" id="pl-review-btn" disabled>
+      🛒 Review Estimate ➔
+    </button>
+  </div>
+
+  <!-- Footer -->
+  <footer id="site-footer"><div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="index.html" class="site-logo"><img src="assets/images/logo.png" alt="Maha Pattasu" style="height:44px;"><div class="logo-text"><span class="logo-name">Maha Pattasu</span><span class="logo-sub">Sri Mahalakshmi Pyro</span></div></a><p class="footer-tagline">Trusted Sivakasi fireworks — GST-registered, delivering across Tamil Nadu &amp; Bangalore.</p><div class="gst-badge">🏛️ GST Registered Business</div></div>
+      <div><h4 class="footer-heading">Quick Links</h4><div class="footer-links"><a href="index.html">Home</a><a href="about.html">About Us</a><a href="products.html">All Products</a><a href="contact.html">Contact</a><a href="safety-tips.html">Safety Tips</a><a href="privacy-policy.html">Privacy Policy</a><a href="disclaimer.html">Disclaimer</a></div></div>
+      <div><h4 class="footer-heading">Products</h4><div class="footer-links"><a href="sound-crackers.html">💥 Sound Crackers</a><a href="sparklers-fountains.html">✨ Sparklers &amp; Fountains</a><a href="fancy-crackers.html">🌸 Fancy Crackers</a><a href="rockets-sky-shots.html">🚀 Rockets &amp; Sky Shots</a><a href="kids-gift-boxes.html">🎁 Kids Gift Boxes</a><a href="vip-family-combo-packs.html">👑 VIP Combo Packs</a></div></div>
+      <div><h4 class="footer-heading">Contact Us</h4><div class="footer-contact-item"><span>📍</span><p>Vembakottai, Virudhunagar District, Tamil Nadu</p></div><div class="footer-contact-item"><span>📞</span><a href="tel:+919444813377">+91 94448 13377</a></div><div class="footer-contact-item"><span>🟢</span><a href="https://wa.me/919444813377" target="_blank" rel="noopener">wa.me/919444813377</a></div><a href="https://wa.me/919444813377?text=Hello!" class="footer-wa-btn" target="_blank" rel="noopener"><svg style="width:18px;height:18px;" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.524 3.659 1.435 5.168L2 22l4.832-1.424A9.956 9.956 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a7.96 7.96 0 01-4.065-1.11l-.292-.173-3.026.793.808-2.942-.19-.302A7.99 7.99 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>WhatsApp Now</a></div>
+    </div>
+    <div class="footer-bottom"><p>© <span id="copyright-year">2026</span> Sri Mahalakshmi Pyro (Maha Pattasu). All rights reserved.</p><div class="footer-bottom-links"><a href="privacy-policy.html">Privacy Policy</a><a href="disclaimer.html">Disclaimer</a></div></div>
+  </div></footer>
+
+  <!-- Mobile Sticky Action Bar (WhatsApp + Call only; Order Online omitted on this page) -->
+  <div id="mobile-action-bar" aria-label="Quick Actions">
+    <a href="https://wa.me/919444813377" class="action-btn" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <svg class="action-icon" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+        <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.524 3.659 1.435 5.168L2 22l4.832-1.424A9.956 9.956 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a7.96 7.96 0 01-4.065-1.11l-.292-.173-3.026.793.808-2.942-.19-.302A7.99 7.99 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/>
+      </svg>
+      <span class="action-label">WhatsApp</span>
+    </a>
+    <a href="tel:9444813377" class="action-btn" aria-label="Call">
+      <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+      </svg>
+      <span class="action-label">Call</span>
+    </a>
+  </div>
+
+  <script src="assets/js/script.js"></script>
+
+  <!-- ============================================================
+       PRICE ESTIMATE & REVIEW CART — INLINE SCRIPT
+       
+       ► To change minimum order:   edit MIN_ORDER below
+       ► To change WA submit number: edit WA_SUBMIT_NUMBER below
+       ► To change notice text:      edit NOTICE_HEADING / NOTICE_BODY below
+       ► Do NOT touch anything outside the "Configuration" section
+         to edit content — use only those constants.
+       ============================================================ -->
+  <script>
+  (function () {
+    'use strict';
+
+    /* ── CONFIGURATION ──────────────────────────────────────────
+       Edit only this block to change prices, limits, or contact. */
+
+    // Minimum estimate value in INR before review/submission is allowed
+    var MIN_ORDER = 3000;
+
+    // WhatsApp number for estimate submissions (no + or spaces)
+    var WA_SUBMIT_NUMBER = '919360090064';
+
+    /* ── CUSTOMER NOTICE MODAL CONTENT ──────────────────────────
+       Edit only the strings below. Do NOT touch the JS logic.   */
+    var NOTICE_HEADING = 'Important Customer Notice';
+    var NOTICE_BODY = [
+      'As per the 2018 Supreme Court order, online sale of firecrackers is not permitted. We respect this and value our customers, so this page works as a price estimate tool only.',
+      'Please browse the price list, add the quantities you need, and submit your estimate. Our team will contact you within 24 hours to confirm availability and pricing, and finalize everything over WhatsApp or a phone call.',
+      'Thank you for choosing Sri Mahalakshmi Pyro (Maha Pattasu) for your Diwali shopping.',
+      'We operate as a GST-registered fireworks business with full statutory compliance, and all deliveries are handled through registered transport services.'
+    ];
+
+    /* ── END CONFIGURATION ────────────────────────────────────── */
+
+    function fmtINR(n) {
+      return '₹' + n.toLocaleString('en-IN');
+    }
+
+    // ── Customer Notice Modal Setup ─────────────────────────────
+    var noticeOverlay  = document.getElementById('notice-overlay');
+    var headingEl      = document.getElementById('notice-heading-el');
+    var bodyEl         = document.querySelector('.notice-body');
+    var noticeCloseBtn = document.getElementById('notice-close');
+    var noticeOkBtn    = document.getElementById('notice-ok');
+
+    headingEl.textContent = NOTICE_HEADING;
+    NOTICE_BODY.forEach(function (para) {
+      var p = document.createElement('p');
+      p.textContent = para;
+      bodyEl.appendChild(p);
+    });
+
+    function dismissNotice() {
+      noticeOverlay.classList.add('notice-hidden');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      document.body.style.overflow = 'hidden';
+      noticeOverlay.classList.remove('notice-hidden');
+    });
+
+    noticeCloseBtn.addEventListener('click', dismissNotice);
+    noticeOkBtn.addEventListener('click', dismissNotice);
+    noticeOverlay.addEventListener('click', function (e) {
+      if (e.target === noticeOverlay) dismissNotice();
+    });
+
+    // ── Grand Total & Main List Validation ───────────────────────
+    var grandTotalEl  = document.getElementById('pl-grand-total');
+    var minWarningEl  = document.getElementById('pl-min-warning');
+    var reviewBtn     = document.getElementById('pl-review-btn');
+
+    function updateRow(input) {
+      var row = input.closest('.pl-item-card');
+      if (!row) return;
+      var ltCell = row.querySelector('.pl-line-total');
+      if (!ltCell) return;
+      var price    = parseInt(ltCell.dataset.price, 10) || 0;
+      var qty      = Math.max(0, parseInt(input.value, 10) || 0);
+      input.value  = qty;
+      var lineAmt  = price * qty;
+      ltCell.dataset.amount = lineAmt;
+      ltCell.textContent = fmtINR(lineAmt);
+      if (qty > 0) {
+        ltCell.classList.add('has-value');
+      } else {
+        ltCell.classList.remove('has-value');
+      }
+    }
+
+    function calculateTotals() {
+      var netTotal = 0;
+      var mrpTotal = 0;
+      var items = [];
+
+      document.querySelectorAll('[data-row]').forEach(function (row) {
+        var qtyInput = row.querySelector('.pl-qty');
+        if (!qtyInput) return;
+        var qty = parseInt(qtyInput.value, 10) || 0;
+        if (qty <= 0) return;
+
+        var ltCell  = row.querySelector('.pl-line-total');
+        var price   = parseInt(ltCell.dataset.price, 10) || 0;
+        var mrp     = parseInt(ltCell.dataset.mrp, 10) || price;
+        var lineNet = price * qty;
+        var lineMrp = mrp * qty;
+
+        netTotal += lineNet;
+        mrpTotal += lineMrp;
+
+        items.push({
+          row: row,
+          inputId: qtyInput.id,
+          name: row.dataset.name || 'Item',
+          pack: row.dataset.pack || '',
+          qty: qty,
+          price: price,
+          mrp: mrp,
+          lineNet: lineNet,
+          lineMrp: lineMrp
+        });
+      });
+
+      return {
+        netTotal: netTotal,
+        mrpTotal: mrpTotal,
+        savings: mrpTotal - netTotal,
+        discPct: mrpTotal > 0 ? Math.round((mrpTotal - netTotal) / mrpTotal * 100) : 0,
+        items: items
+      };
+    }
+
+    function recalcTotal() {
+      var data = calculateTotals();
+      grandTotalEl.textContent = fmtINR(data.netTotal);
+
+      if (data.netTotal < MIN_ORDER) {
+        minWarningEl.style.display = 'block';
+        reviewBtn.disabled = true;
+        reviewBtn.classList.add('disabled');
+      } else {
+        minWarningEl.style.display = 'none';
+        reviewBtn.disabled = false;
+        reviewBtn.classList.remove('disabled');
+      }
+    }
+
+    // Decrement buttons
+    document.querySelectorAll('.pl-dec').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var input = btn.nextElementSibling;
+        var val = parseInt(input.value, 10) || 0;
+        if (val > 0) {
+          input.value = val - 1;
+          updateRow(input);
+          recalcTotal();
+        }
+      });
+    });
+
+    // Increment buttons
+    document.querySelectorAll('.pl-inc').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var input = btn.previousElementSibling;
+        var val = parseInt(input.value, 10) || 0;
+        input.value = val + 1;
+        updateRow(input);
+        recalcTotal();
+      });
+    });
+
+    // Direct input
+    document.querySelectorAll('.pl-qty').forEach(function (input) {
+      input.addEventListener('input', function () { updateRow(input); recalcTotal(); });
+      input.addEventListener('change', function () { updateRow(input); recalcTotal(); });
+    });
+
+    // ── Review / Cart Modal Setup ────────────────────────────────
+    var cartOverlay       = document.getElementById('cart-overlay');
+    var cartCloseBtn      = document.getElementById('cart-close');
+    var cartBackBtn       = document.getElementById('cart-back-btn');
+    var cartItemsContainer= document.getElementById('cart-items-container');
+    var cartMrpTotalEl    = document.getElementById('cart-mrp-total');
+    var cartSavingsEl     = document.getElementById('cart-savings');
+    var cartGrandTotalEl  = document.getElementById('cart-grand-total');
+    var cartMinAlertEl    = document.getElementById('cart-min-alert');
+    var cartFinalSubmitBtn= document.getElementById('cart-final-submit');
+
+    var custNameInput     = document.getElementById('cust-name');
+    var custMobileInput   = document.getElementById('cust-mobile');
+    var custAddressInput  = document.getElementById('cust-address');
+
+    function openReviewModal() {
+      var data = calculateTotals();
+      if (data.netTotal < MIN_ORDER) return;
+
+      renderCart(data);
+      cartOverlay.classList.remove('cart-hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeReviewModal() {
+      cartOverlay.classList.add('cart-hidden');
+      document.body.style.overflow = '';
+    }
+
+    function renderCart(data) {
+      if (!data) data = calculateTotals();
+
+      cartMrpTotalEl.textContent   = fmtINR(data.mrpTotal);
+      cartSavingsEl.textContent    = fmtINR(data.savings) + ' (' + data.discPct + '% off)';
+      cartGrandTotalEl.textContent = fmtINR(data.netTotal);
+
+      // Validate MIN_ORDER
+      if (data.netTotal < MIN_ORDER) {
+        cartMinAlertEl.style.display = 'block';
+        cartFinalSubmitBtn.disabled = true;
+        cartFinalSubmitBtn.classList.add('disabled');
+      } else {
+        cartMinAlertEl.style.display = 'none';
+        cartFinalSubmitBtn.disabled = false;
+        cartFinalSubmitBtn.classList.remove('disabled');
+      }
+
+      if (data.items.length === 0) {
+        cartItemsContainer.innerHTML = '<div class="cart-empty-msg">🛒 Your estimate list is empty. Please return to the price list and add items.</div>';
+        return;
+      }
+
+      var html = '<div class="cart-items-wrap">';
+
+      data.items.forEach(function (item, idx) {
+        html += '<div class="cart-item-card">';
+        html += '<div class="cart-item-name">' + (idx + 1) + '. ' + item.name + '</div>';
+        html += '<div class="cart-item-row">';
+        html += '<div class="cart-item-meta">' + (item.pack ? item.pack + ' · ' : '') + 'Qty ' + item.qty + ' × ₹' + item.price + '</div>';
+        html += '<div class="cart-item-total">' + fmtINR(item.lineNet) + '</div>';
+        html += '<button type="button" class="cart-del-btn" data-input-id="' + item.inputId + '" aria-label="Remove ' + item.name + '">Remove</button>';
+        html += '</div>';
+        html += '</div>';
+      });
+
+      html += '</div>';
+      cartItemsContainer.innerHTML = html;
+
+      // Attach remove listeners
+      cartItemsContainer.querySelectorAll('.cart-del-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var inputId = btn.getAttribute('data-input-id');
+          var input = document.getElementById(inputId);
+          if (input) {
+            input.value = 0;
+            updateRow(input);
+            recalcTotal();
+            renderCart();
+          }
+        });
+      });
+    }
+
+    reviewBtn.addEventListener('click', openReviewModal);
+    cartCloseBtn.addEventListener('click', closeReviewModal);
+    cartBackBtn.addEventListener('click', closeReviewModal);
+
+    cartOverlay.addEventListener('click', function (e) {
+      if (e.target === cartOverlay) closeReviewModal();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        if (!cartOverlay.classList.contains('cart-hidden')) {
+          closeReviewModal();
+        } else if (!noticeOverlay.classList.contains('notice-hidden')) {
+          dismissNotice();
+        }
+      }
+    });
+
+    // Clear input errors on typing
+    [custNameInput, custMobileInput, custAddressInput].forEach(function (input) {
+      input.addEventListener('input', function () {
+        input.classList.remove('input-error');
+      });
+    });
+
+    // ── Estimate Number Generator ────────────────────────────────
+    function generateEstimateNo(name) {
+      var clean = (name || 'ESTIMATE').toUpperCase().replace(/[^A-Z0-9]/g, '');
+      if (!clean) clean = 'ESTIMATE';
+      var now = new Date();
+      var d   = String(now.getDate()).padStart(2, '0');
+      var m   = String(now.getMonth() + 1).padStart(2, '0');
+      var y   = String(now.getFullYear()).slice(-2);
+      var h   = String(now.getHours()).padStart(2, '0');
+      var min = String(now.getMinutes()).padStart(2, '0');
+      return clean + '-' + d + m + y + '-' + h + min;
+    }
+
+    // ── Final WhatsApp Submit ────────────────────────────────────
+    cartFinalSubmitBtn.addEventListener('click', function () {
+      if (cartFinalSubmitBtn.disabled) return;
+
+      var nameVal    = custNameInput.value.trim();
+      var mobileVal  = custMobileInput.value.trim();
+      var addressVal = custAddressInput.value.trim();
+
+      var hasError = false;
+
+      if (!nameVal) {
+        custNameInput.classList.add('input-error');
+        hasError = true;
+      }
+      if (!mobileVal || mobileVal.length < 10) {
+        custMobileInput.classList.add('input-error');
+        hasError = true;
+      }
+      if (!addressVal) {
+        custAddressInput.classList.add('input-error');
+        hasError = true;
+      }
+
+      if (hasError) {
+        alert('Please fill in your Name, 10-digit Mobile Number, and Delivery Address to proceed.');
+        return;
+      }
+
+      var totals = calculateTotals();
+      if (totals.netTotal < MIN_ORDER) {
+        alert('Minimum estimate value is ₹3,000. Please add more items before submitting.');
+        return;
+      }
+
+      var estimateNo = generateEstimateNo(nameVal);
+
+      // Build structured WhatsApp message
+      var lines = [
+        '🎆 PRICE ESTIMATE – Sri Mahalakshmi Pyro (Maha Pattasu)',
+        'Estimate No: ' + estimateNo,
+        '',
+        '👤 Customer Details:',
+        '• Name:    ' + nameVal,
+        '• Mobile:  ' + mobileVal,
+        '• Address: ' + addressVal,
+        ''
+      ];
+
+      var catSections = document.querySelectorAll('.pl-category-section');
+      catSections.forEach(function (cat) {
+        var catName  = cat.dataset.category || 'Miscellaneous';
+        var rows     = cat.querySelectorAll('[data-row]');
+        var catLines = [];
+
+        rows.forEach(function (row) {
+          var qtyInput = row.querySelector('.pl-qty');
+          if (!qtyInput) return;
+          var qty = parseInt(qtyInput.value, 10) || 0;
+          if (qty === 0) return;
+
+          var ltCell   = row.querySelector('.pl-line-total');
+          var price    = parseInt(ltCell.dataset.price, 10) || 0;
+          var lineNet  = price * qty;
+          var name     = row.dataset.name || 'Item';
+          var pack     = row.dataset.pack || '';
+
+          catLines.push('  \u2022 ' + name + (pack ? ' (' + pack + ')' : '') + ' \u00d7' + qty + ' @ \u20b9' + price + ' = \u20b9' + lineNet.toLocaleString('en-IN'));
+        });
+
+        if (catLines.length > 0) {
+          lines.push('\uD83D\uDCE6 ' + catName + ':');
+          catLines.forEach(function (l) { lines.push(l); });
+          lines.push('');
+        }
+      });
+
+      lines.push('\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500');
+      lines.push('MRP Total:      \u20b9' + totals.mrpTotal.toLocaleString('en-IN'));
+      lines.push('You Save:       \u20b9' + totals.savings.toLocaleString('en-IN') + ' (' + totals.discPct + '% off MRP)');
+      lines.push('Grand Total:    \u20b9' + totals.netTotal.toLocaleString('en-IN'));
+      lines.push('\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500');
+      lines.push('');
+      lines.push('\u26a0\ufe0f This is a price ESTIMATE only \u2014 not a confirmed purchase or order.');
+      lines.push('Please contact us to confirm stock, pricing, and delivery arrangements. Thank you!');
+
+      var msg = lines.join('\n');
+      var url = 'https://wa.me/' + WA_SUBMIT_NUMBER + '?text=' + encodeURIComponent(msg);
+      window.open(url, '_blank', 'noopener,noreferrer');
+    });
+
+    // ── Initialize ───────────────────────────────────────────────
+    recalcTotal();
+
+  })();
+  </script>
+</body>
+</html>
