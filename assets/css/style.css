@@ -219,6 +219,18 @@ p  { font-size: 1rem; color: var(--text-mid); }
   font-variant: small-caps;
   letter-spacing: 0.5px;
 }
+#mobile-action-bar .action-btn[href="price-list.html"] {
+  background: var(--gold);
+  color: var(--navy);
+}
+#mobile-action-bar .action-btn[href="price-list.html"]:hover,
+#mobile-action-bar .action-btn[href="price-list.html"]:active {
+  background: var(--gold-light);
+  color: var(--navy);
+}
+#mobile-action-bar .action-btn[href="price-list.html"]::after {
+  display: none;
+}
 
 @media (min-width: 769px) {
   #mobile-action-bar {
@@ -953,6 +965,26 @@ p  { font-size: 1rem; color: var(--text-mid); }
   transition: var(--transition);
   display: flex;
   flex-direction: column;
+}
+.combo-pack-card {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(0,0,0,.07);
+  transition: var(--transition);
+}
+.combo-pack-card:hover {
+  box-shadow: var(--shadow-md, 0 6px 18px rgba(0,0,0,.12));
+  transform: translateY(-3px);
+}
+.combo-pack-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.vip-combo-grid {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 .product-card:hover {
   transform: translateY(-5px);
