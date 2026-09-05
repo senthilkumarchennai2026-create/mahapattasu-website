@@ -956,6 +956,15 @@ p  { font-size: 1rem; color: var(--text-mid); }
   grid-template-columns: repeat(auto-fill, minmax(260px,1fr));
   gap: 1.5rem;
 }
+/* Used on category pages with only 2 teaser cards, so they center instead of
+   sticking to the left on wide desktop screens. Mobile/tablet behavior is
+   untouched — this only applies at desktop widths. */
+@media (min-width: 769px) {
+  .products-grid.products-grid-2col {
+    grid-template-columns: repeat(2, 300px);
+    justify-content: center;
+  }
+}
 .product-card {
   background: var(--white);
   border-radius: var(--radius-md);
